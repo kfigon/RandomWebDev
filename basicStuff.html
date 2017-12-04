@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<script>
 		function writeDate(){
+
 			var date = new Date();
 			var dzien;
 			switch(date.getDay()){
@@ -21,6 +22,7 @@
 			
 			document.getElementById("obecnaData").innerHTML=napis;
 		}
+		
 		function poleTrojkata(a,h){
 			var pole = 0.5*a*h;
 			var napis = "Pole trojkata a="+a+"; h="+h+"; wynosi = "+pole;
@@ -36,6 +38,7 @@
 			wynik+=napis[napis.length-1];
 			document.getElementById("pisanieOdTylu").innerHTML=wynik;
 		}
+		
 		function czyRokPrzystepny(){
 			var data = new Date();
 			var czyPrzystepny = (data.getYear() % 4 == 0);
@@ -51,6 +54,7 @@
 			var liczba = parseInt(document.getElementById("liczbaA").value);
 			alert(liczba+" bam!!");
 		}
+		
 		function tab() {
 			var tab = [1,2,3,4];
 			var napis = "tablica:";
@@ -61,6 +65,32 @@
 			var textNode = document.createTextNode(napis);
 			node.appendChild(textNode);
 			document.body.appendChild(node);
+		}
+		
+		function Klasa(x) {
+			// dobra praktyka, potem
+			// mozna korzystac z self
+			// jak z this w innych jezykach.
+			// w przeciwnym wypadku moga byc problemy 
+			// z zakresami
+			var self=this;
+			
+			this.x=x;
+			this.foo = function() {
+				var napis="";
+				for(var i=0; i<self.x; i++) {
+					napis+="E";
+				}
+				return napis;
+			};
+			this.bar = function() {
+				var napis = self.foo();
+				
+				var node = document.createElement("p");
+				var textNode = document.createTextNode(napis);
+				node.appendChild(textNode);
+				document.body.appendChild(node);
+			};
 		}
 	</script>
 </head>
@@ -83,6 +113,10 @@
 	piszOdTyluIPrzestawPierwszaIOstatniaLitere("w3resource");
 	czyRokPrzystepny();
 	tab();
+	
+	k = new Klasa(10);
+	k.bar();
+	
 </script>
 </body>
 
