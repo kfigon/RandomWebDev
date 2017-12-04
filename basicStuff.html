@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script>
+		function writeDate(){
+			var date = new Date();
+			var dzien;
+			switch(date.getDay()){
+				case 1: dzien="Poniedizalek"; break;
+				case 2: dzien="Wtorek"; break;
+				case 3: dzien="sroda"; break;
+				case 4: dzien="czwartek"; break;
+				case 5: dzien="piatke"; break;
+				case 6: dzien="sobota"; break;
+				case 7: dzien="niedziela"; break;
+				default: dzien=""; break;
+			}
+			var napis = "Dzis jest: "+dzien+
+			", current time is: "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+			
+			document.getElementById("obecnaData").innerHTML=napis;
+		}
+		function poleTrojkata(a,h){
+			var pole = 0.5*a*h;
+			var napis = "Pole trojkata a="+a+"; h="+h+"; wynosi = "+pole;
+			document.getElementById("poleTrojkata").innerHTML=napis;
+		}
+		
+		function piszOdTyluIPrzestawPierwszaIOstatniaLitere(napis){
+			var wynik = "";
+			wynik+=napis[0];
+			for(var i =napis.length-2; i>0; i--){
+				wynik+=napis[i];
+			}
+			wynik+=napis[napis.length-1];
+			document.getElementById("pisanieOdTylu").innerHTML=wynik;
+		}
+		function czyRokPrzystepny(){
+			var data = new Date();
+			var czyPrzystepny = (data.getYear() % 4 == 0);
+			var napis = czyPrzystepny ? "Jest rok przystepny" : "nie jest rok przystepny";
+			
+			var par = document.createElement("p");
+			var tekst = document.createTextNode(napis); 
+			par.appendChild(tekst);
+			document.body.appendChild(par); 
+		}
+
+		function klik() {
+			var liczba = parseInt(document.getElementById("liczbaA").value);
+			alert(liczba+" bam!!");
+		}
+		function tab() {
+			var tab = [1,2,3,4];
+			var napis = "tablica:";
+			for (var i=0; i<tab.length; i++) {
+				napis+=tab[i];
+			}
+			var node = document.createElement("p");
+			var textNode = document.createTextNode(napis);
+			node.appendChild(textNode);
+			document.body.appendChild(node);
+		}
+	</script>
+</head>
+
+<!--<body onload = "getDate()"> -->
+<body>
+	<p id="obecnaData"></p>
+	<p id="poleTrojkata"></p>
+	<p id="pisanieOdTylu"></p>
+
+	<input id="liczbaA">wpisz tu liczbe i kliknij buton</input>
+	<button onclick="klik()">Kliknij!</button>
+	
+	
+<script>
+	writeDate();
+	// drukarka!
+	//window.print();
+	poleTrojkata(3,5);
+	piszOdTyluIPrzestawPierwszaIOstatniaLitere("w3resource");
+	czyRokPrzystepny();
+	tab();
+</script>
+</body>
+
+</html>
