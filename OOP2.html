@@ -1,0 +1,41 @@
+<!doctype htm>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+    function Pies(imie, rasa) {
+      this.imie=imie;
+      this.rasa=rasa;
+
+      this.szczek = function () {
+        console.log("szczek!");
+      };
+
+      this.toString = function () {
+        return this.imie+" jest rasy " + this.rasa;
+      };
+    }
+
+    function Kundel(imie) {
+      Pies.call(this, imie, "kundel");
+      
+      this.szczek = function () {
+        console.log("szczek po kundlowemu");
+      };
+    }
+  </script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    var p = new Pies("Azor", "jamnik");
+    var k = new Kundel("Burek");
+
+    console.log(p.toString());
+    p.szczek();
+
+    console.log(k.toString());
+    k.szczek();
+  </script>
+</body>
+</html>

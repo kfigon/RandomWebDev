@@ -1,0 +1,50 @@
+<!doctype htm>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="jquery.js"></script>
+
+  <script type="text/javascript">
+  function docReady() {
+    // $ - objekt! Wolamy z parametrem document.
+    // Do ready wpuszczamy callback. Event!
+      $(document).ready(function () {
+        console.log("dokument gotowy, sprawdzone z jquery");
+      });
+
+      // inny sposob zapisania tego samego:
+      // function foo() {
+      //   console.log("ASD");
+      // }
+      // $(document).ready(foo);
+  }
+  function windowResize() {
+    // gdy okno zmieni rozmiar
+    $(window).resize(function () {
+      var szer = $(window).width();
+      var wys = $(window).height();
+      var rozmiar = "("+szer+","+wys+")";
+      console.log("zmieniono rozmiar okna " + rozmiar);
+    });
+  }
+
+  function foo(kolor) {
+    $('#par').css('background-color',kolor);
+  }
+
+  </script>
+</head>
+
+<body>
+  <p id="par">napisior</p>
+  <a href="#" onclick="foo('red')">czerwony</a>
+  <a href="#" onclick="foo('green')">zielony</a>
+
+  <script type="text/javascript">
+
+    docReady();
+    windowResize();
+
+  </script>
+</body>
+</html>

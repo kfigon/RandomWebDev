@@ -1,0 +1,28 @@
+<!doctype htm>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="jquery.js"></script>
+
+</head>
+
+<body>
+  <form id="foremka">
+    <input type="text"></input>
+  </form>
+
+  <div id="wynik"></div>
+  <script type="text/javascript">
+
+    $('#foremka').change(function (event) {
+      console.log("klikniete!");
+      var wpisaneRzeczy = event.target.value;
+
+      console.log(wpisaneRzeczy);
+      $('#wynik').text(wpisaneRzeczy);
+    });
+
+
+  </script>
+</body>
+</html>

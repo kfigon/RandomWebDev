@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+		<meta charset="UTF-8">
+</head>
+
+<body>
+	<script>
+		// == vs ===
+		0 == false   // true
+		0 === false  // false, because they are of a different type
+		1 == "1"     // true, automatic type conversion for value only
+		1 === "1"    // false, because they are of a different type
+		null == undefined // true
+		null === undefined // false
+		'0' == false // true
+		'0' === false // false
+		
+		var x = 5;
+		document.write("x=5<br>");
+		document.write("x===5.0 " + (x===5.0)); // true
+		document.write("<br>x===5 " + (x===5)); // true
+		
+		document.write("<br>0==false " + (0==false)); // true
+		document.write("<br>0===false " + (0===false)); // false
+		document.write('<br><br>');
+		
+		// tablice
+		var tab = ["x", "y", "z"];
+		// w srodku to jest obiekt!!1
+		var dict={"name":" ASD", "liczba" :5};
+		
+		document.write("tab[0] = " + tab[0]);
+		document.write("<br>");
+		document.write("dict[\"name\"] = " + dict['name']);
+		
+		document.write("<br><br>");
+		var tab2 = Array(2); //new Array();,    Array(1,2,3);
+		tab2.push("trzeci");
+		tab2[1]="dwa";
+		// undef, 2, 3
+		for (var i=0; i<tab2.length;i++) {
+			document.write(tab2[i]);
+			document.write("<br>");
+		}
+	
+	// zwroci indeksy!!! 0,1
+		//for(el in tab2) {
+		//	console.log(el);
+		//}
+		
+		function asd(arg) {
+			console.log(arg);
+		}
+		
+	</script>
+	
+	<br><br>
+	<p onclick="alert('przegladarka zatrzymala przetwarzanie na tym tagu. bedzie kontynuowac jak sie kliknie ok)">kliknij!</p>
+	<p onclick="asd(5)">kliknij mnie, zobaczysz loga</p>
+</body>
+</html>

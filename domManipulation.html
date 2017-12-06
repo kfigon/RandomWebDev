@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<p onclick="zmien()">kliknij tutaj zeby zmienic paragraf nizej</p>
+	<p id="paragraf">napis</p>
+
+	<a href="#" onclick="dodajElement()">kliknik zeby dodac element do listy</a>
+	<ul id="lista">
+		<li>pierwszy</li>
+	</ul>
+
+	<script>
+		// get node
+		function zmien() {
+			console.log(arg);
+			var node = document.getElementById("paragraf");
+			node.innerHTML="INNY NAPIS!";
+		}
+
+		var counter = 1;
+		function dodajElement() {
+			// global
+			counter++;
+			var nowyNode = document.createElement('li');
+			nowyNode.innerHTML = "elemnent nr "+counter;
+			var node = document.getElementById('lista');
+			node.appendChild(nowyNode);
+		}
+
+	</script>
+</body>
+</html>
