@@ -35,6 +35,21 @@
       p.szczek();
       p.szczekWieleRazy(3);
       console.log(p.toString());
+
+      // inline object
+      var o={
+        name: "ASD",
+        val: 5,
+        foo : function () {
+          return this.name+this.val;
+        }
+      };
+
+      console.log(o.name);
+      console.log(o.val);
+      console.log(o['val']);
+      console.log(o.foo());
+
   </script>
 </body>
 </html>
