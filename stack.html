@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript">
+			function Node(val) {
+				this.val=val;
+				this.next=null;
+			}
+			function Stack() {
+				this.top = null;
+				this.size=0;
+
+				this.getSize = function () {
+					return this.size;
+				};
+				this.isEmpty = function () {
+					return (this.size==0);
+				};
+				this.pop = function () {
+					if(!this.isEmpty()) {
+						this.size--;
+						var toRet = this.top;
+						var next = toRet.next;
+						this.top = next;
+						return toRet.val;
+					}
+					return null;
+				};
+				this.push = function (val) {
+					var nowy = new Node(val);
+					if(this.isEmpty()) {
+						this.top = nowy;
+					} else {
+						nowy.next = this.top;
+						this.top=nowy;
+					}
+					this.size++;
+				};
+				this.clear = function () {
+					while(!this.isEmpty()) {
+						this.pop();
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function empty() {
+				var s = new Stack();
+				console.assert(s.getSize() == 0, "getSize");
+				console.assert(s.pop() == null, "popempty");
+			}
+			function push() {
+				var s = new Stack();
+				s.push(5);
+				console.assert(s.getSize() == 1, "getSize push");
+				console.assert(s.pop() == 5, "pop push");
+				console.assert(s.getSize() == 0, "getSize after pop");
+			}
+			function pushPush() {
+				var s = new Stack();
+				s.push(1);
+				s.push(2);
+				s.push(3);
+				console.assert(s.getSize() == 3, 'getSize push3');
+				console.assert(s.pop() == 3, 'pop');
+
+				console.assert(s.getSize() == 2);
+				console.assert(s.isEmpty() == false);
+
+				console.assert(s.pop() == 2, 'pop');
+				console.assert(s.pop() == 1, 'pop');
+				console.assert(s.pop() == null, 'pop null');
+				console.assert(s.isEmpty(), 'is empty');
+			}
+			function clear() {
+				var s= new Stack();
+				s.push(1);
+				s.push(2);
+				s.push(3);
+				s.clear();
+				console.assert(s.getSize() == 0);
+				console.assert(s.pop() == null);
+			}
+
+			empty();
+			push();
+			pushPush();
+			clear();
+			console.log("all done");
+		</script>
+	</body>
+</html>
