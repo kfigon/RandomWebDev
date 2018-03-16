@@ -55,6 +55,8 @@ window.onload = function(){
       case 'ArrowDown':  s.wDol();   break;
     }
   });
+  // albo prototyp! document.mojKontext = s;
+  // i w srodku handlera uzywac evt.target.mojKontext;
   setInterval(function () {
     rysujWeza(s);
     s.ruch();
