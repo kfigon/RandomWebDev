@@ -16,22 +16,32 @@ function Snake() {
 
   this.vx=0;
   this.vy=1;
+  this.ogon =[{x:this.x, y:this.y}, {x:this.x,y:this.y}, {x:this.x,y:this.y}];
+
+  this.przesujOgon =function() {
+    for(var i=0; i<this.ogon.length-1; i++){
+        this.ogon[i]=this.ogon[i+1];
+    }
+    this.ogon[this.ogon.length-1] = {x:this.x, y:this.y};
+  };
 
   this.ruch = function() {
     this.x+=this.vx*this.size;
     this.y+=this.vy*this.size;
 
+    this.przesujOgon();
+
     if(this.x<0) {
-      this.x=0;
-    }
-    if(this.x+this.size > szer) {
       this.x=szer-this.size;
     }
+    if(this.x+this.size > szer) {
+      this.x=0;
+    }
     if(this.y < 0) {
-      this.y=0;
+      this.y=wys-this.size;
     }
     if(this.y +this.size > wys) {
-      this.y=wys-this.size;
+      this.y=0;
     }
   };
   this.wLewo = function() {
@@ -56,10 +66,13 @@ function rysujWeza(snake) {
   var ctx = canv.getContext("2d");
 
   ctx.fillStyle = "#00FF00";
-  ctx.fillRect(snake.x,
-    snake.y,
-    snake.size,
-    snake.size);
+
+  for(var i=0; i<snake.ogon.length; i++){
+    ctx.fillRect(snake.ogon[i].x,
+      snake.ogon[i].y,
+      snake.size,
+      snake.size);
+  }
 }
 
 window.onload = function(){
