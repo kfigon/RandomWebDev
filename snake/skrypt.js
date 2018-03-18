@@ -9,6 +9,13 @@ function czysc() {
   wys = canv.height;
 }
 
+function losujJablko() {
+  var size=10;
+  return {x: Math.floor(Math.random()*(szer)),
+          y: Math.floor(Math.random()*(wys)),
+        size: size};
+}
+
 function Snake() {
   this.x=10;
   this.y=10;
@@ -23,6 +30,20 @@ function Snake() {
         this.ogon[i]=this.ogon[i+1];
     }
     this.ogon[this.ogon.length-1] = {x:this.x, y:this.y};
+  };
+
+  this.czyZjedzono = function (jablko) {
+    var x = this.x;
+    var jx = jablko.x;
+    var y = this.y;
+    var jy = jablko.y;
+    var dx = Math.abs(x-jx);
+    var dy = Math.abs(y-jy);
+    return (dx < this.size && dy<this.size);
+  };
+
+  this.rosnij = function () {
+    this.ogon.push({x:this.x, y:this.y});
   };
 
   this.ruch = function() {
@@ -75,8 +96,19 @@ function rysujWeza(snake) {
   }
 }
 
+function rysujJablko(jablko) {
+  var canv = document.getElementById('myCanvas');
+  var ctx = canv.getContext("2d");
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(jablko.x, jablko.y, jablko.size, jablko.size);
+}
+
 window.onload = function(){
   var s = new Snake();
+  var canv = document.getElementById('myCanvas');
+  szer = canv.width;
+  wys = canv.height;
+
   document.addEventListener('keydown', evt => {
     switch (evt.code) {
       case 'ArrowRight': s.wPrawo(); break;
@@ -85,13 +117,21 @@ window.onload = function(){
       case 'ArrowDown':  s.wDol();   break;
     }
   });
+
+  var jablko = losujJablko();
+
   // albo prototyp! document.mojKontext = s;
   // i w srodku handlera uzywac evt.target.mojKontext;
   setInterval(() =>{
 
     czysc();
+    rysujJablko(jablko);
     rysujWeza(s);
     s.ruch();
+    if(s.czyZjedzono(jablko)) {
+      s.rosnij();
+      jablko = losujJablko();
+    }
 
-  }, 1000/5);
+  }, 1000/10);
 };
