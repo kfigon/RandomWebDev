@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- odswiezanie co sekunde -->
+        <meta http-equiv="refresh" content="1">
+
+        <script>
+            // klasa
+            function Kwadrat(x,y, szer, wys) {
+                this.x = x;
+                this.y = y;
+                this.szer = szer;
+                this.wys = wys;
+
+                this.losujKolor = function () {
+                    var kolory = ["blue", "green", "yellow", "black", "magenta",
+                        "red", "azure", "beige", "brown", "white", "coral", "cadetblue",
+                        "cyan", "darkGray", "darkgreen", "hotpink",
+                    "LightSkyBlue","Lime", "maroon"];
+
+                    var id = Math.floor(Math.random() * (kolory.length));
+                    return kolory[id];
+                };
+
+                this.generujNoda = function () {
+                    var node = document.createElement("div");
+                    node.style.position = "absolute";
+                    node.style.top = this.x +"px";
+                    node.style.left = this.y + "px";
+
+                    node.style.width = this.szer + "px";
+                    node.style.height = this.wys + "px";;
+                    node.style.background = this.losujKolor();
+
+                    return node;
+                };
+            }
+
+            function generujKwadraty() {
+                var x=30;
+                var y=30;
+                var width = 300;
+                var height = 300;
+                var body = document.getElementsByTagName("body")[0];
+
+                while (width > 30) {
+                    var k = new Kwadrat(x,y,width,height);
+                    body.appendChild(k.generujNoda());
+
+                    x+=5;
+                    y+=5;
+                    width-=10;
+                    height-=10;
+                }
+            }
+        </script>
+    </head>
+    <body onload = "generujKwadraty()">
+    </body>
+</html>

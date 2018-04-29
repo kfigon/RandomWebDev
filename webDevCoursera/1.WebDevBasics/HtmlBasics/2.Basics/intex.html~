@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+    <!-- komentarz -->
+    <head>
+        <title>Moja prosta strona</title>
+    </head>
+
+    <body>
+        <!-- id do skoku na gore - na samym dole mam linka -->
+        <h1 id="skoczTu">Naglowek</h1>
+        <p>paragraf blablablablablabla </p>
+        tekst tekst tekst<br>
+        nowa linia <br><br>
+
+        <i>italic</i><br>
+        <b>bold</b>
+        <br><br>
+
+        <a href="http://www.google.pl" target="_blank">link do googla w nowej karcie</a>
+        <br><br>
+
+        <sup>gora</sup>
+        <sub>dol</sub>
+
+        <mark>asd</mark>
+        <br><br>
+
+        <!-- ol - lista z numerkami -->
+        <ul>
+            <li>jeden</li>
+            <li>dwa</li>
+            <li>trzy</li>
+        </ul>
+
+        <p>kolejny paragraf
+          a to wcale nie nowa linia</p>
+          <img src="obrazek.jpg"/>
+          <br><br>
+
+          <a href="http://google.pl" target="_blank" title="kilkinij">
+            <img src="obrazek.jpg" width="30%"/>
+          </a>
+          <!-- <audio src="" autoplay controls> </audio> -->
+            
+        <p>asdasdasd<br><br><br><br><br><br><br><br><br><br></p>
+        
+        
+        <a href="#skoczTu">skocz do poprzedniego paragrafu</a>
+          
+          
+    </body>
+
+</html>

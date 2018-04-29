@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Projekt - zgadnij kolor</title>
+    <meta charset="utf-8">
+
+  </head>
+
+  <body onload="zgaduj()">
+
+    <script>
+    function zgaduj() {
+        var kolory = ['red', 'yellow', 'blue', 'black'];
+
+          var ileProb=0;
+          var idKoloruDoZgadneicia = Math.floor(Math.random()*kolory.length);
+          var komunikat = "Zgadnij kolor " +kolory;
+          do {
+            var decyzja = prompt(komunikat)
+            ileProb++;
+
+            if(decyzja < idKoloruDoZgadneicia) {
+              komunikat = "za mala";
+            }
+            else if(decyzja > idKoloruDoZgadneicia){
+              komunikat = "za duza"
+            }
+            else {
+              document.body.style.background = kolory[idKoloruDoZgadneicia];
+              alert("Zgadles! " + ileProb + " prob");
+              break;
+            }
+          } while (true);
+
+
+    }
+    </script>
+
+
+  </body>
+</html>

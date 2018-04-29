@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<title>jquery - awesome</title>
+	</head>
+
+	<body>
+		<!-- to co kiedys robilo sie recznie w HTMLu lub w DOM
+	 	w jquery mozna latwo dostepowac i robic cuda z css i html-->
+		<div id="sekcja1">
+			<h1>napis!</h1>
+			<p id="lorem">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+				sed do eiusmod tempor incididunt ut labore et dolore magna
+				aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+				ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+			<p id="zwierzak"> asdasd</p>
+		</div>
+
+		<form>
+			<button id="przycisk">kliknij!</button>
+		</form>
+
+		<ul>
+			<li>a</li>
+			<li>b</li>
+			<li name="mamNazwe">c</li>
+			<li name="mamNazwe2">d</li>
+		</ul>
+
+		<h2 id="znikajacy">znikajacy napis</h2>
+		<div id="najedzNaMnie">najedz na mnie</div>
+
+		<script text="text/javascript">
+			// zamiast DOMem sie babrac
+			// skladnia: $(element).metoda(funkcjaJs) {}
+
+			// dopiero gdy dokument sie zaladuje
+			$("document").ready(function () {
+				// korzystam z normalnego kodu
+				console.log("zaladowano strone");
+
+				// klasy: .
+				// id #
+				// tagi: bez niczego
+
+				$("#sekcja1").css("color", "red");
+
+				// pojedyncze rzeczy tak:
+				$("p").css("color", "magenta");
+
+				// wiele atrybutow tak:
+				$("#zwierzak").css({
+					"background": "yellow",
+					"font-size":"30px",
+					"color":"green"
+				});
+
+				// linki, ale tylko te wystepujace po tagu em
+				// $("em + a").css();
+				// nty element listy tez mozna
+
+				// zmiana tekstu w li ktory ma jakikolwiek atrybut name
+				$("li[name]").html("hehehehhe");
+				$("li[name='mamNazwe2']").html("huhuhuhu"); //okreslony name
+				// parzyste wiersze tabeli!
+
+				// .hide()
+				//.show()
+
+				// laczenie
+				$("#znikajacy").fadeOut(1500).delay(1000).fadeIn(1500);
+
+				$("#przycisk").click(function() {
+						alert("handler!");
+				});
+
+				// .addClass() a potem dostepowac do tejze klasy
+				// .attr()
+
+				$("#najedzNaMnie").mouseover(function(e) {
+					$("title").html("jquery super awesome");
+					//$(this).hide();
+				});
+
+				$("#najedzNaMnie").mouseout(function(e) {
+					$("title").html("jquery awesome");
+				});
+			});
+
+		</script>
+
+	</body>
+
+</html>

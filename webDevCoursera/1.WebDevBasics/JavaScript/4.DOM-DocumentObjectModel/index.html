@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Ucze sie DOMa</title>
+    <meta charset="utf-8">
+    <style>
+      .asd
+      {
+        color: blue;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1 class="asd">basic webpage</h1>
+		<script src="code.js"></script>
+
+		<form>
+			<input onclick="usunWszystkie() "type="submit" value="kliknij zeby wyczyscic wszystko">
+		</form>
+		
+		<p id="paragrafDoZmiany">napisik, przed uruchomieniem skryptu nie byl czerwony</p>
+
+		<!-- brak bialego znaku wazny, bo nie dziala -->
+		<ul id="listaDoSklonowania"><li>ASD</li></ul>	  
+		
+		<script>
+			function sleep(ms) {
+				var start = new Date().getTime();
+				while(new Date().getTime() < start + ms) {}
+			}
+			
+			var node = document.getElementById("paragrafDoZmiany");
+			node.setAttribute("style", "color:black");
+			
+			console.log("start, za sekunde zmienie kolor paragrafu");
+			sleep(1000); // czekaj sekunde przed odpaleniem tego
+			console.log("stop");
+			
+			node.setAttribute("style", "color:red");
+		</script>
+	  
+	  <script src = "nodeOperations.js"></script>
+	  
+	  <h1 onclick = "dodajNoda2()">kliknij zeby dodac cos!</h1>
+	  <h1 onclick = "usunNoda()">kliknij zeby usunac to cos!</h1>
+	  <h1 onclick = "klonujListe()">klonujListe!</h1>
+  </body>
+</html>

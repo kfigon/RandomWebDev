@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Strona taka jak ma byc</title>
+
+    <style>
+      .glownaOtoczka
+      {
+        border-style: solid;
+        border-width: thin;
+        padding: 30px;
+      }
+      .otoczkaFieldSeta
+      {
+        border-style: solid;
+        border-width: 10px;
+        border-color: yellow;
+        background-color: lightyellow;
+        padding: 5px;
+      }
+      .kwadracikWzrostu
+      {
+        background-color: purple;
+        border-style: solid;
+        border-color: purple;
+        color: white;
+        align-self: center;
+      }
+
+      label:hover
+      {
+        font-size: 20px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="glownaOtoczka">
+
+      <h1>Wpisz dane!</h1><br><br>
+
+      <form>
+        <fieldset class="otoczkaFieldSeta">
+          <legend>Twoja twarz</legend>
+
+          <label for="zdjecie">Twoje zdjecie</label>
+          <input type="submit" id="zdjecie" value="Wybierz zdjecie">
+        </fieldset>
+        <br>
+
+        <fieldset class="otoczkaFieldSeta">
+          <legend>Twoje informacje</legend>
+
+          <label for="imie">Twoje imie</label>
+          <input type="text" id="imie" placeholder="Wpisz swoje imie">
+
+          <br>
+          <label>Plec</label>
+          <input type="radio" name="plec" value="Mezczyzna"> Mezczyzna
+          <input type="radio" name="plec" value="Kobieta"> Kobieta <br>
+
+          <label for="dataUrodzenia">Data urodzenia</label>
+          <input type="date" id="dataUrodzenia" placeholder="dd/mm/yyyy"><br>
+
+          <label for="kolor">Ulubiony kolor</label>
+          <input type="color" id="kolor"><br>
+
+          <label for="kraj">Pochodzenia</label>
+          <select>
+           <option value="Polska">Polska</option>
+           <option value="Niemcy">Niemcy</option>
+           <option value="Czechy">Czechy</option>
+          </select>
+          <br>
+
+        </fieldset>
+        <br>
+
+        <fieldset class="otoczkaFieldSeta">
+          <legend>Twoje parametry</legend>
+
+          <label for="wzrost">Twoj wzrost</label>
+          <label class="kwadracikWzrostu">Niski</label>
+          <input type="range" id="wzrost" min="0" max="10">
+          <label class="kwadracikWzrostu">Wysoki</label>
+
+        </fieldset>
+        <br>
+
+        <fieldset class="otoczkaFieldSeta">
+          <legend>Informacje kontaktowe</legend>
+
+          <label for="mail">Twoj mail</label>
+          <input type="email" id="mail">
+
+        </fieldset>
+        <br>
+
+        <input type="submit" value="Wyslij"/>
+      </form>
+
+    </div>
+  </body>
+</html>

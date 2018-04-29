@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Ucze sie JS</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+
+    <script src="kod.js"></script>
+
+    <script>
+    function zgaduj() {
+        var ileProb=0;
+        var liczbaDoZgadniecia = Math.floor(Math.random()*10)+1; //<1:10>
+        var komunikat = "Zgadnij liczbe od <0:10>";
+        do {
+          var decyzja = prompt(komunikat)
+          ileProb++;
+
+          if(decyzja < liczbaDoZgadniecia) {
+            komunikat = "za mala";
+          }
+          else if(decyzja > liczbaDoZgadniecia){
+            komunikat = "za duza"
+          }
+          else {
+            alert("Zgadles! " + ileProb + " prob");
+            break;
+          }
+        } while (true);
+    }
+    </script>
+
+    <br><br>
+    <form onsubmit="zgaduj()">
+      <input type="submit" value="kliknij zeby zagrac w zgadywanke">
+    </form>
+
+  </body>
+</html>

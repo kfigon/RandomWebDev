@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<title>ucze sie eventow</title>
+		<meta charset="utf-8">
+	</head>
+	
+	<body>
+		<script src="code.js"></script>
+		
+		<h1 id="naglowek" onmouseover="zmienNaglowek('blue')" onmouseout="zmienNaglowek('red')">najedz na mnie</h1>
+	
+		<h1 id="naglowekBudzik" onclick="nastawBudzik()">Kliknij na mnie zeby ustawic budzik</h1>
+	
+		<div>
+			kliknij na obrazek!<br>
+			<img id="obrazek" src="obrazek.png" onclick="robMagieZObrazkiem()" style="left:10px; position:absolute">
+		</div>
+	</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<script>
+		var ileBuziek=2;
+		function czysc(div) {
+			while(div.firstChild != null){
+				div.removeChild(div.firstChild);
+			}
+		}
+
+		function handleGame(klikEvent) {
+			var nazwaKlinietego = klikEvent.target.id;
+			// buzka ma 5 liter
+			var idKliknietego = parseInt(nazwaKlinietego.slice(5, nazwaKlinietego.length));
+
+			if(idKliknietego == ileBuziek) {
+				console.log("sukces!");
+				ileBuziek += 1;
+
+				var divWzorzec = document.getElementById("wzorzecBuziek");
+				var divDoZnalezienia = document.getElementById("doZnalezienia");
+				czysc(divWzorzec);
+				czysc(divDoZnalezienia);
+				generuj();
+			}
+			else {
+				console.log("fail");
+			}
+		}
+
+		function Buzka(numerek) {
+			this.x= Math.floor(Math.random()*100);
+			this.y=Math.floor(Math.random()*300);
+			this.numerek = numerek;
+
+			this.generujDOM = function() {
+				var node = document.createElement("img");
+				node.src="face.gif";
+				node.id = "buzka"+this.numerek;
+
+				node.style.position ="relative";
+				node.style.left = this.x + "px";
+				node.style.top = this.y + "px";
+				node.style.width="40px";
+				node.style.heigth="40px";
+
+				window.addEventListener("click", function(event){
+					handleGame(event);
+				});
+
+				return node;
+			};
+		}
+
+		function generuj() {
+			var divWzorzec = document.getElementById("wzorzecBuziek");
+			var divDoZnalezienia = document.getElementById("doZnalezienia");
+
+			for (var i = 0; i < ileBuziek; i++) {
+				var b = new Buzka(i);
+				var node = b.generujDOM();
+				divWzorzec.appendChild(node);
+
+			 	var nowy = node.cloneNode(true);
+				divDoZnalezienia.appendChild(nowy);
+			}
+			divDoZnalezienia.appendChild(new Buzka(ileBuziek).generujDOM());
+
+		}
+		</script>
+		<style>
+			.margines
+			{
+				width:2px;
+				background-color:black;
+				height:400px;
+				position: relative;
+				margin-left: 400px;
+				float:left;
+			}
+			.pozycjaPolaGry1
+			{
+				margin-left: 50px;
+				margin-top:50px;
+				float:left;
+			}
+			.pozycjaPolaGry2
+			{
+				margin-left: 300px;
+				margin-top:50px;
+				float:left;
+			}
+		</style>
+	</head>
+	<body onload="generuj()">
+		<h1>Gra w zgadywanie!</h1>
+		<p>kliknij w nadmiarowa buzke po prawej</p>
+		<!--
+		<img src="face.gif" style="position:relative; left:510px; top:200px; width:50px; heigth:50px;">
+		-->
+
+		<div align="center">
+
+			<div id="wzorzecBuziek" class="pozycjaPolaGry1"></div>
+			<div id="margines" class = "margines"></div>
+			<div id="doZnalezienia" class="pozycjaPolaGry2"></div>
+
+		</div>
+
+	</body>
+</html>
