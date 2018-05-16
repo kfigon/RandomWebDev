@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Komponent from './components/MojKomponent';
 
+// odpalamy yarn start
+
 class App extends Component {
 
   constructor() {
