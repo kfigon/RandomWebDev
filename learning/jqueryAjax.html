@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>fun</title>
+    <script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+    
+    <label>Wpisz tu rzecz: </label><input id='napis' type="text"/>
+    <br>
+
+    <form id="przyciski">
+            <input type="radio" name="radioName" value="1"/> ASD <br>
+            <input type="radio" name="radioName" value="2"/> SAD <br>
+            <input type="radio" name="radioName" value="3"/> XAX <br>
+    </form>
+    
+    <button id="buton" type="submit" onclick="klik()">Submit</button>
+
+    <script>
+        function klik() {
+            var napis = $("#napis").val();
+            console.log(napis);    
+            
+            var opcja = $('input[name=radioName]:checked', '#przyciski').val();
+            console.log(opcja);
+            
+            $.ajax({
+                url: "asd",
+                success: function (result) {
+                    console.log("sie udalo sie");
+                }
+            });
+            
+        }
+        
+
+    </script>
+</body>
+</html>
