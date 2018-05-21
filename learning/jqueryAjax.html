@@ -31,9 +31,15 @@
                 url: "asd",
                 success: function (result) {
                     console.log("sie udalo sie");
+                },
+                type        : "post", //typ połączenia
+                contentType : 'aplication/json', //gdy wysyłamy dane czasami chcemy ustawić ich typ
+                dataType    : 'json', //typ danych jakich oczekujemy w odpowiedzi
+                data        : { //dane do wysyłki
+                    name : napis,
+                    idx : opcja
                 }
-            });
-            
+            }); 
         }
         
 
