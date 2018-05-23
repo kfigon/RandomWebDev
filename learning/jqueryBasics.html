@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    
+    <h1 id="idk">napisior</h1>
+
+    <input type="text" id='inputField'/>
+    <button onclick="klik()">kliknij mnie</button>
+
+    <p>asd</p>
+    <p>sda</p>
+    <p>xxx</p>
+
+    <script>
+        $("#idk").css('color', 'blue');
+        $("#idk").css('font-size', 'xx-large');
+        
+        // get all paragraphs
+        var paragrafy = $('p');
+        var outStr="";
+        for(var i=0; i<paragrafy.length; i++){
+            outStr += paragrafy[i].innerText+', ';
+        }
+        alert(outStr)
+
+        function klik() {
+            var txt = $('#inputField').val();
+            alert(txt);
+        }
+
+        
+
+    </script>
+</body>
+</html>
