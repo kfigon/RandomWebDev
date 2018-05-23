@@ -26,3 +26,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.asd-styl {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+
+}

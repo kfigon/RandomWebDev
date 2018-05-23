@@ -8,10 +8,18 @@ const MIASTA = [
   {nazwa: 'fdsagdf', zip: '11122'}
 ];
 
+const stylik = {
+  border: '5px dotted lightBlue',
+  fontFamily: 'Arial'
+}
+
 class Weather extends Component {
+  
   render() {
     return (
-      <h1>Hello! {this.props.zip}</h1>
+      <div className="asd-styl">
+        <h1 style={stylik}>Hello! {this.props.zip}</h1>
+      </div>
     );
   }
 }
@@ -20,16 +28,19 @@ class App extends Component {
 
   mapujMiasto(miasto) {
     return (
-      <button>{miasto.nazwa} - {miasto.zip}</button>
+      <button style={{margin: '5px'}}>{miasto.nazwa} - {miasto.zip}</button>
     );
   }
 
   render() {
     return (
-      <div className="App">
-       
+      // nie da sie wstawic stylu do
+      // wlasnego komponentu
+
+      <div className="App"> 
         <Weather/>
-        {MIASTA.map(this.mapujMiasto)}
+        
+        { MIASTA.map(this.mapujMiasto) }
       </div>
     );
   }
