@@ -1,0 +1,13 @@
+body {
+    background-color: cornflowerblue;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.app {
+    margin: 100px;
+    text-align: center
+}
+
+h1 {
+    font-size: 50px;
+}
