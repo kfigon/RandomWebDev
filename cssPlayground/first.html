@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>Learning CSS</title>
+</head>
+<style>
+    /* selektor i pseudselektor */
+    /* h1:hover{ color:red } */
+
+    /* li:nth-child(2) co drugi */
+    /* li:first-child{ color:steelblue } */
+    /* h2 + a { } jeden po drugim i wtedy zaaplikuj*/
+    /* textarea ~ button - jeden po drugim wewnatrz tego samego rodzica */
+    /* ul > li kazdy li wewnatrz ul */
+    /* h2[class=subtitle]  h2 z klasa subtitle*/
+    /* img[src=""] obrazek z danego zrodla, nawet folderu */
+    
+    /* kolory -RGB color: #0000FF, rgb(0,0,255) */
+
+    #title{ color: rgb(186,133,9) }
+
+/* im nizej w heirarchii - jasniej */
+    h2{ color: rgb(200, 150, 40); }
+
+/* lub background-color, ale background daje tez obrazki, ma wiecej mozliwosci */
+    body{ background: rgb(204,299,255); }
+/* body {background: url("");}  strona albo obrazek lokalnie*/
+
+
+</style>
+
+<body>
+    <h1 id='title'>My website!</h1>
+    <hr>
+    <h2>This is a paragraph</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget tortor metus. Aliquam varius vel enim nec
+        ullamcorper. Nam at efficitur orci, a accumsan sem. Suspendisse ac viverra leo, quis fermentum ligula. Proin
+        cursus et sem in laoreet. Phasellus quam odio, auctor sodales imperdiet quis, maximus sit amet orci. Sed non est
+        eu risus
+        hendrerit laoreet. Nulla auctor lectus vel metus lacinia egestas. Proin accumsan eros neque, cursus efficitur
+        lacus scelerisque non. Quisque mollis arcu eget ante fermentum fermentum.
+    </p>
+
+    <br>
+    <strong>My List</strong>
+    <ul>
+        <li>first</li>
+        <li>second</li>
+        <li>third</li>
+        <li>fourth</li>
+        <li>fifth</li>
+    </ul>
+
+    <img src="somepicture.png" onClick="console.log('foo!');" />
+
+    <form>
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <button>Submit</button>
+    </form>
+</body>
+
+</html>
