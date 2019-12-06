@@ -2,6 +2,8 @@
 
 <head>
     <title>Learning CSS</title>
+    <!-- dobrze fonty z neta umieszczac ponad swoimi includami - loading time i jej kolejnosc -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <style>
     /* selektor i pseudselektor */
@@ -31,12 +33,33 @@
     body {
         /* background: linear-gradient(to right, red, blue, green, steelblue); */
         background: linear-gradient(to bottom right, rgba(94, 255, 126, 0.8), rgba(94, 255, 126, 0.1));
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-size: 20px;
+        text-align: justify;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .pretty-text {
+        text-transform: capitalize;
+        text-align: center;
+        /* text-decoration: underline; */
+        font-style: oblique;
+        font-size: 95%;
+        margin: 30px;
     }
 
     .kolorowy-kwadrat {
-        width: 150;
+        /*pixele 150px, cm, cale lub procenty*/
+        width: 20.5%;
         height: 150;
-        background: radial-gradient(rgb(200, 0, 255), rgba(32, 100, 236));
+        background: radial-gradient(rgb(120, 180, 120), rgba(20, 80, 20));
     }
 </style>
 
@@ -48,10 +71,16 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget tortor metus. Aliquam varius vel enim nec
         ullamcorper. Nam at efficitur orci, a accumsan sem. Suspendisse ac viverra leo, quis fermentum ligula. Proin
         cursus et sem in laoreet. Phasellus quam odio, auctor sodales imperdiet quis, maximus sit amet orci. Sed non est
-        eu risus
-        hendrerit laoreet. Nulla auctor lectus vel metus lacinia egestas. Proin accumsan eros neque, cursus efficitur
+        eu risus hendrerit laoreet. Nulla auctor lectus vel metus lacinia egestas. Proin accumsan eros neque, cursus
+        efficitur
         lacus scelerisque non. Quisque mollis arcu eget ante fermentum fermentum.
     </p>
+
+    <p class="pretty-text">Donec in massa at turpis placerat sodales vitae sit amet est. Proin vitae magna in quam elementum malesuada et vitae
+    odio. Fusce efficitur in lorem eget tempus. Fusce in sapien risus. Integer bibendum lacinia ligula, eu fermentum tellus
+    interdum in. Vestibulum feugiat dui libero. Maecenas pretium aliquam risus, nec dictum elit vehicula sit amet. Duis nec
+    lacinia mauris, vel faucibus sapien. Suspendisse tempor turpis a efficitur aliquam. Nam consectetur bibendum dolor ut
+    tempor. Pellentesque a mi lectus.</p>
 
     <br>
     <strong>My List</strong>
