@@ -61,6 +61,54 @@
         height: 150;
         background: radial-gradient(rgb(120, 180, 120), rgba(20, 80, 20));
     }
+
+    /* css box model. od srodka:
+    content, padding, border, margin*/
+    .my-box{
+        width: 30%;
+        height: 30%;
+
+        background: white;
+        margin: 20px;
+        /* dotted, solid, double */
+        border: 5px solid black;
+        padding: 15px;
+
+        /* wszystko przed nim pojdzie w lewo, a on w prawo */
+        /* float: right;  */
+        /* display: block */
+        /* display: none - znika element */
+    }
+    /* elementy blokowe lub inline */
+    /* blokowe - jeden nad drugim. p, h1,2,3,  */
+    /* inline - kolejne beda kolo siebie. span, input, button */
+    /* mozna to zmieniac parametrem display*/
+    /* float - wyrownanie. w zaleznoci jaki element to zachowa sie inaczej*/
+
+    
+     /* (3:15:17) Float & Display Types */
+
+    /* inline-block - kombinacja obu. dodaja do inline box model */
+    .box-fun {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border: 5px solid black;
+        margin: 10px;
+    }
+
+    .box1{
+        display: inline-block;
+    }
+
+    .box2 {
+        display: inline-block;
+    }
+
+    .box3 {
+        display: inline-block;
+    }
+
 </style>
 
 <body>
@@ -93,7 +141,14 @@
     </ul>
 
     <div class='kolorowy-kwadrat'></div>
-    <img src="somepicture.png" onClick="console.log('foo!');" />
+    <img class="my-box" src="somepicture.png" onClick="console.log('foo!');" />
+
+    <h2>block playground</h2>
+    <div class="box-fun">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+    </div>
 
     <form>
         <input type="text" placeholder="Name">
