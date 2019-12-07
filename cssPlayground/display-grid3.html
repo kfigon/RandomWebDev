@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <title>Learning CSS grid</title>
+</head>
+<style>
+    .red {
+        background: red;
+    }
+
+    .green {
+        background: green;
+    }
+
+    .blue {
+        background: blue;
+    }
+
+    .yellow {
+        background: yellow;
+    }
+
+    .container {
+        display: grid;
+        /* fractions */
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1em 1em;
+        /* szerokosc elementow */
+        grid-auto-columns: minmax(100px, auto);
+        grid-auto-rows: minmax(100px, auto);
+    }
+</style>
+
+<body>
+    <div class='container'>
+        <div class='red'></div>
+        <div class='green'></div>
+        <div class='blue'></div>
+        <div class='yellow'></div>
+    </div>
+</body>
+
+</html>
