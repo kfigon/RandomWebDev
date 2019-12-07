@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <title>Learning flexbox</title>
+</head>
+<style>
+    /* mamy container (najczesciej div) i flex itemy (dowolne)*/
+    /* paddingi, marginesy, td i displaye z floatami to hacki */
+    /* to jest lepsze */
+
+    /* defaultowo flex na kontenerze - ustawi elementy liniowo */
+    .container {
+        /* width: 120px; */
+        height: 180px;
+        margin: 10px;
+
+
+        display: flex;
+        flex-direction: row;
+        /* row - default
+        row-reverse od prawej strony ekranu poleci */
+        /* column-reverse row row-reverse; */
+
+        /* wrapping - do nowej linii, jak juz sie nie miesci */
+        flex-wrap: wrap;
+
+        /* alignment horyzontalny: do lewej/prawej/srodka/*/
+        /* i do tego spacing pomiedzy, co wplywa na alignment */
+        justify-content: space-between;
+
+        /* alignment wertykalny i rozciaganie (stretch/baseline) */
+        align-items: center;
+    }
+
+    .box {
+        width: 30px;
+        height: 30px;
+        background: rgb(0, 134, 20);
+        margin: 3px;
+
+        text-align: center;
+        line-height: 30px;
+        color: white;
+
+        /* kolejnosc w flex kontenerze, zaczyna sie od 1. 0 to default */
+        /* raczej na inline stylu. Trzeba tez pamietac o reszcie elementow
+bo jak sie uzyje na jednym to reszta ma default przeciez */
+        /* order: 1; */
+
+        /* rzeczy przydatne do responsywnosci: */
+        /* flex-basis - minimalna szerokosc flex itemu w px */
+        /* flex-grow - nadanie extra space, wiecej niz standarowe width - 
+        elementy beda szersze. x razy wiecej niz reszta. kazdy musi miec to property, bo nie zadziala */
+        /* flex-shrink - jesli ekran bedzie maly i elementy przestana sie miescic
+        to mozna tutaj skalowanie w dol ustawic. 
+        Jaka waga zmniejszania w stosunku do reszty. 
+        (np. element 3 razy szybciej bedzie sie  zmniejszac) 
+        default 1 - zmniejszaj tak samo jak reszte
+         0 - nie bedzie sie zmniejszac responsywnie w ogole */
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+</style>
+
+<body>
+
+    <div class='container'>
+        <div class='box'>A</div>
+        <div class='box'>B</div>
+        <div class='box'>C</div>
+        <div class='box'>D</div>
+        <div class='box'>E</div>
+        <div class='box'>F</div>
+        <div class='box'>G</div>
+        <div class='box'>H</div>
+        <div class='box'>I</div>
+        <div class='box'>J</div>
+    </div>
+</body>
+
+</html>

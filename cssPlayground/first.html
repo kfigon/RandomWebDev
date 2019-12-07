@@ -64,7 +64,7 @@
 
     /* css box model. od srodka:
     content, padding, border, margin*/
-    .my-box{
+    .my-box {
         width: 30%;
         height: 30%;
 
@@ -74,41 +74,16 @@
         border: 5px solid black;
         padding: 15px;
 
-        /* wszystko przed nim pojdzie w lewo, a on w prawo */
         /* float: right;  */
         /* display: block */
         /* display: none - znika element */
     }
+
     /* elementy blokowe lub inline */
     /* blokowe - jeden nad drugim. p, h1,2,3,  */
     /* inline - kolejne beda kolo siebie. span, input, button */
     /* mozna to zmieniac parametrem display*/
     /* float - wyrownanie. w zaleznoci jaki element to zachowa sie inaczej*/
-
-    
-     /* (3:15:17) Float & Display Types */
-
-    /* inline-block - kombinacja obu. dodaja do inline box model */
-    .box-fun {
-        width: 50px;
-        height: 50px;
-        background: white;
-        border: 5px solid black;
-        margin: 10px;
-    }
-
-    .box1{
-        display: inline-block;
-    }
-
-    .box2 {
-        display: inline-block;
-    }
-
-    .box3 {
-        display: inline-block;
-    }
-
 </style>
 
 <body>
@@ -124,11 +99,15 @@
         lacus scelerisque non. Quisque mollis arcu eget ante fermentum fermentum.
     </p>
 
-    <p class="pretty-text">Donec in massa at turpis placerat sodales vitae sit amet est. Proin vitae magna in quam elementum malesuada et vitae
-    odio. Fusce efficitur in lorem eget tempus. Fusce in sapien risus. Integer bibendum lacinia ligula, eu fermentum tellus
-    interdum in. Vestibulum feugiat dui libero. Maecenas pretium aliquam risus, nec dictum elit vehicula sit amet. Duis nec
-    lacinia mauris, vel faucibus sapien. Suspendisse tempor turpis a efficitur aliquam. Nam consectetur bibendum dolor ut
-    tempor. Pellentesque a mi lectus.</p>
+    <p class="pretty-text">Donec in massa at turpis placerat sodales vitae sit amet est. Proin vitae magna in quam
+        elementum malesuada et vitae
+        odio. Fusce efficitur in lorem eget tempus. Fusce in sapien risus. Integer bibendum lacinia ligula, eu fermentum
+        tellus
+        interdum in. Vestibulum feugiat dui libero. Maecenas pretium aliquam risus, nec dictum elit vehicula sit amet.
+        Duis nec
+        lacinia mauris, vel faucibus sapien. Suspendisse tempor turpis a efficitur aliquam. Nam consectetur bibendum
+        dolor ut
+        tempor. Pellentesque a mi lectus.</p>
 
     <br>
     <strong>My List</strong>
@@ -142,13 +121,6 @@
 
     <div class='kolorowy-kwadrat'></div>
     <img class="my-box" src="somepicture.png" onClick="console.log('foo!');" />
-
-    <h2>block playground</h2>
-    <div class="box-fun">
-        <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="box3"></div>
-    </div>
 
     <form>
         <input type="text" placeholder="Name">

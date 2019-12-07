@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>Learning displays and float</title>
+</head>
+<style>
+    /* elementy inline i blokowe
+    - blokowe zajmuja cala szerokosc. div, p, ul, h2 itd
+    - inline ukladaja sie jeden za drugim, tyle space ile potrzebuja i nie wiecej.
+     span, img, a
+    nie maja width/height ani top-botton margin!!!
+    
+    `display` pozwala modyfikowac ich typ domyslny */
+
+    /* inline-block - blokowe bez nowej linii */
+
+    .box-inline {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+    }
+
+    .box-block {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    #box1 {
+        background: red;
+    }
+
+    #box2 {
+        background: green;
+    }
+
+    #box3 {
+        background: blue;
+        float: right
+    }
+
+    #box4 {
+        background: yellow;
+    }
+
+    #box5 {
+        background: teal;
+        float: right;
+    }
+</style>
+
+<body>
+    <div id="box1" class="box-inline"></div>
+    <div id="box2" class="box-inline"></div>
+    <div id="box3" class="box-inline"></div>
+
+    <br>
+
+    <div id="box4" class="box-block"></div>
+
+    <!-- poszedl na dol, bo blokowy -->
+    <div id="box5" class="box-block"></div>
+
+</body>
+
+</html>
