@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Learning CSS grid</title>
+</head>
+<style>
+
+    .container > p{
+        background: #eee;
+        padding: 1em;
+    }
+
+    .container > p:nth-child(odd){
+        background: #ddd;
+    }
+
+    .container {
+
+        display: grid;
+        grid-template-columns: 70% 30%;
+        gap: 1em 1em
+    }
+</style>
+
+<body>
+    <div class='container'>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, impedit! Repudiandae aspernatur obcaecati dicta veniam atque modi id ut, nemo ullam ex porro eligendi ipsa nam delectus harum impedit repellat! Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad odio ipsum deleniti in labore eveniet? Voluptas recusandae impedit, est iste explicabo animi alias iusto, maiores aut voluptatibus minima doloribus fuga! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis perferendis mollitia quo dolores ipsa maxime provident, corporis ipsam voluptatibus harum voluptas molestiae odio eveniet quae fuga similique dolore nulla sunt.</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id sequi enim iusto commodi. Omnis saepe ipsum error illo rerum, odio quia quod qui tempore laborum sint sapiente nesciunt voluptatibus facere! Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, impedit! Repudiandae aspernatur obcaecati dicta
+    veniam atque modi id ut, nemo ullam ex porro eligendi ipsa nam delectus harum impedit repellat! Lorem ipsum dolor
+    sit amet consectetur adipisicing elit. Ad odio ipsum deleniti in labore eveniet? Voluptas recusandae impedit, est
+    iste explicabo animi alias iusto, maiores aut voluptatibus minima doloribus fuga! Lorem ipsum dolor, sit amet
+    consectetur adipisicing elit. Debitis perferendis mollitia quo dolores ipsa maxime provident, corporis ipsam
+    voluptatibus harum voluptas molestiae odio eveniet quae fuga similique dolore nulla sunt.</p>
+<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id sequi enim iusto commodi. Omnis saepe ipsum error illo
+    rerum, odio quia quod qui tempore laborum sint sapiente nesciunt voluptatibus facere! Lorem ipsum dolor sit amet
+    consectetur adipisicing elit</p>
+
+    </div>
+</body>
+
+</html>
