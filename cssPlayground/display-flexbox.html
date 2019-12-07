@@ -4,6 +4,8 @@
     <title>Learning flexbox</title>
 </head>
 <style>
+    /* flex raczej skupia sie na poziomym alignmencie i repononsywnosci */
+
     /* mamy container (najczesciej div) i flex itemy (dowolne)*/
     /* paddingi, marginesy, td i displaye z floatami to hacki */
     /* to jest lepsze */
@@ -45,9 +47,11 @@
         /* kolejnosc w flex kontenerze, zaczyna sie od 1. 0 to default */
         /* raczej na inline stylu. Trzeba tez pamietac o reszcie elementow
 bo jak sie uzyje na jednym to reszta ma default przeciez */
+
         /* order: 1; */
 
         /* rzeczy przydatne do responsywnosci: */
+
         /* flex-basis - minimalna szerokosc flex itemu w px */
         /* flex-grow - nadanie extra space, wiecej niz standarowe width - 
         elementy beda szersze. x razy wiecej niz reszta. kazdy musi miec to property, bo nie zadziala */
@@ -59,6 +63,11 @@ bo jak sie uzyje na jednym to reszta ma default przeciez */
          0 - nie bedzie sie zmniejszac responsywnie w ogole */
         flex-grow: 1;
         flex-shrink: 1;
+        /* flex - wszystkie 3 w jednym propertiesie. grow, shrink, basis */
+
+        /* to overriduje align-items. Pozwala rozciagac/umieszczac
+         wertykalnie kazdy element osobno */
+        /* align-self: ; */
     }
 </style>
 
