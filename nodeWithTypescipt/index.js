@@ -2,8 +2,10 @@
 // npm init
 // npm tsc --init
 // nowa sekcja do scripts - build. Tam "tsc"
+Object.defineProperty(exports, "__esModule", { value: true });
 //run -> npm run-script build
 // jest sporo pluginow jak np. ts-node-dev. Live reload
+var foo = require("./mymodule");
 console.log('hello from TS!');
 var Foo = /** @class */ (function () {
     function Foo(value) {
@@ -16,3 +18,4 @@ var Foo = /** @class */ (function () {
 }());
 var x = new Foo(123);
 console.log(x.foo());
+console.log(foo(4));
