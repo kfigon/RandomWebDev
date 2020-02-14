@@ -6,6 +6,11 @@
 // zrobilem npm install node-fetch - sciagnelo node_module
 // npm install dociagnie wszystko do jsona
 
+// do sekcji scripts mozna dodac np. 
+// "build": "tsc" - typescript przy buildzie
+// npm run-script build
+
+
 // modules:
 const bar = require('./someModule').bar;
 const foo = require('./someModule').foo;
@@ -19,5 +24,4 @@ foo();
 fetch('https://www.google.com')
 .then(val => {
     console.log('is request ok? ' + val.ok);
-
 })
