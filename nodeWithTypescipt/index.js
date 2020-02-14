@@ -9,6 +9,10 @@ var foo = require("./mymodule");
 console.log('hello from TS!');
 var Foo = /** @class */ (function () {
     function Foo(value) {
+        var _this = this;
+        this.x = function () {
+            return _this.value;
+        };
         this.value = value;
     }
     Foo.prototype.foo = function () {
@@ -18,4 +22,5 @@ var Foo = /** @class */ (function () {
 }());
 var x = new Foo(123);
 console.log(x.foo());
+console.log(x.x());
 console.log(foo(4));

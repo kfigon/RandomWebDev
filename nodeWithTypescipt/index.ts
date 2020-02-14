@@ -18,9 +18,14 @@ class Foo {
     foo() : string {
         return 'foo' + this.value;
     }
+
+    x = () : number => {
+        return this.value;
+    }
 }
 
 
 const x = new Foo(123);
 console.log(x.foo());
+console.log(x.x());
 console.log(foo(4));
