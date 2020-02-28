@@ -6,12 +6,21 @@
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <style>
+
+             /* width i height dotycza tego, co jest ustawione w box-sizing */
+             /* to sie ustawia w uniwersalnym selektorze, bo inaczej jest nadpisywane
+             przez elementy blokowe*/
+        *{
+            box-sizing: border-box;
+        }
         body {
             margin: 0;
             font-family: 'Lato', sans-serif;
         }
 
-        .overview{
+        .overview {
+            /* to jest shortcut prperty - background-color <- wlasciwy property */
+            /* mozna podejrze w chrome dev tools jest strzalka na stylach */
             background: #be3e3e;
             font-family: inherit;
             color: rgb(226, 198, 198);
@@ -20,6 +29,11 @@
             border: 5px black solid;
             margin: 20px;
              /* top,r,bot,left albo top/bot,left/right albo wszystkie jednoczesnie*/
+
+             /* block level elements maja 100% width */
+             width: 50%;
+             
+             /* height 100% available by parent container! */
         }
 
         .main-text {
@@ -32,6 +46,13 @@
            dzieci, sasiedzi i inne, wszystko obowiazuje
         */
 
+
+        /* elementy blokowe i inline */
+        /* mozna to zmienic parametrem display: block/none/inline */
+
+        /* display: none - znika element, w domie jest */
+        /* visibility: hidden - znika, ale pozycja zostaje */
+
     </style>
 </head>
 
@@ -40,8 +61,7 @@
         <h1>hello from the course!</h1>
     </section>
 
-    <h1 class="main-text">Lorem ipsum dolor sit.</h1>
-    
+    <h1 class="main-text">Lorem ipsum dolor sit.</h1> 
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quas eos nam dolorum reprehenderit neque exercitationem.</p>
 </body>
 

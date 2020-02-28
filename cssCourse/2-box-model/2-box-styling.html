@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .overview {
+            background: #be3e3e;
+            font-family: inherit;
+            color: rgb(226, 198, 198);
+            padding: 10px 20px;
+        }
+
+        .main-text {
+            font-family: 'Anton', sans-serif;
+            font-weight: lighter;
+        }
+        .main-header{
+            background: rgb(85, 184, 85);
+            padding: 10px 20px;
+        }
+        .main-link{
+            display: inline-block;
+        }
+        .main-link-value{
+            color: rgb(3, 78, 3);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .main-nav {
+            display: inline-block;
+            text-align: right;
+        }
+        .main-nav__items {
+            list-style: none;
+            padding-left: 35em;
+        }
+        .main-nav__item {
+            /* zachowuja sie jak inline ale obowiazuja je box model, mozna
+            ustawiac marginesy i paddingi */
+            display: inline-block;
+            padding-left: 10px;
+        }
+        .main-nav__item a {
+            text-decoration: none;
+        }
+        /* pseudo klasa hover */
+        .main-nav__item a:hover {
+            color: rgb(252, 252, 252);
+            font-weight: bold;
+        }
+</style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="main-link"><a class="main-link-value" href="#">MY COMPANY</a></div>
+        <nav class="main-nav">
+            <ul class="main-nav__items">
+                <li class="main-nav__item"><a href="https://google.com">Google</a></li>
+                <li class="main-nav__item"><a href="https://wp.pl">wp</a></li>
+                <li class="main-nav__item"><a href="https://udemy.com">udemy</a></li>
+            </ul>
+        </nav>
+    </header>  
+
+    <section class="overview">
+        <h1>hello from the course!</h1>
+    </section>
+
+    <h1 class="main-text">Lorem ipsum dolor sit.</h1> 
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quas eos nam dolorum reprehenderit neque exercitationem.</p>
+</body>
+
+</html>
