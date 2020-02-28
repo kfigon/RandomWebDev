@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        /* adjecent sibling */
+        /* p od razu po h2, na wspolnym rodzicu */
+        h2+p {
+            color: red
+        }
+
+        /* general sibling */
+        /* p gdzies tam po h3, obojetnie ile tagow. kolejnosc wazna
+        Na tym samym rodzicu */
+        h3~p {
+            color: blue
+        }
+
+        /* child */
+        /* p wewnatrz div. Bezposrednie dziecko 
+        jesli w div bedzie art i w nim dopiero p - nie zadziala */
+        div>p {
+            color: green;
+        }
+
+        /* descendant */
+        /* dziecko niezaleznie ktorego poziomu */
+        div span {
+            color: turquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>h2 text</h2>
+    <p>par: sibling adjecent in red</p>
+    <p>par: regular</p>
+
+    <h3>h3 text</h3>
+    <p>first paragrah in blue- general sibling</p>
+    <span>some tags... span</span>
+    <p>another par in blue - general sibling</p>
+
+    <div>
+        <p>par in dif, color green</p>
+        <article>
+            <p>par in article - normal</p>
+        </article>
+    </div>
+
+
+    <div>
+        <article>
+            <span>span inside div and article. descendant, turquoise</span>
+        </article>
+    </div>
+</body>
+
+</html>

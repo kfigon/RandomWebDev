@@ -1,2 +1,5 @@
 # 1-basics
-* selectors, combinators, classes etc.
+* https://developer.mozilla.org/pl/docs/Web/CSS
+* selectors, 
+* combinators 
+* classes
