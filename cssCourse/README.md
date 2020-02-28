@@ -1,2 +1,2 @@
 # 1-basics
-* selectors, classes etc.
+* selectors, combinators, classes etc.

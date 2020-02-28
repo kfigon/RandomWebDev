@@ -4,10 +4,16 @@
 <head>
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <style>
         /* global selector:  *{}   */
         section{
-            background: #0f1a56
+            background: #0f1a56;
+            font-family: inherit; /* Jawnie uzyj tego ktory ma rodzic. */
+        }
+        /* pochodne odzidzicza to ustawienie, a bardziej konkretne nadpisza */
+        body{
+            font-family: 'Lato', sans-serif;
         }
         h1{
             /* standard sans-serif font in browser. Can be changed to other than 
@@ -16,6 +22,13 @@
             color: rgb(226, 198, 198);
             font-weight: lighter;
         }
+
+        /* kombinator - kazde p wewnatrz section. mozna laczyc klasy i inne rzeczy */
+        /* wyzsze specificity */
+        section p{
+            color: rgb(79, 194, 98);
+        }
+
 
         /* atrybut na htmlu, np. <button disabled/> */
         [disabled] {}
@@ -35,7 +48,10 @@
 
     <section>
         <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h1>
+        <p>some other text</p>
     </section>
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis quas eos nam dolorum reprehenderit neque exercitationem.</p>
 </body>
 
 </html>
