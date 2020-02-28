@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
+    <style>
+        /* global selector:  *{}   */
+        section{
+            background: #0f1a56
+        }
+        h1{
+            /* standard sans-serif font in browser. Can be changed to other than 
+            Helvetica in chrome settings */
+            font-family: 'Anton', sans-serif;
+            color: rgb(226, 198, 198);
+            font-weight: lighter;
+        }
+
+        /* atrybut na htmlu, np. <button disabled/> */
+        [disabled] {}
+
+        /* kebab-case recomended, css jest case-insensitive  */
+        #jakies-id{}
+        .jakas-klasa{}
+    </style>
+</head>
+
+<body>
+     <!-- important order - file, style section, inline -->
+     <!-- in css more specific stuff - will override less specific -->
+    <section style="background: rgb(155, 22, 66);">
+        <h1>hello from the course!</h1>
+    </section>
+
+    <section>
+        <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h1>
+    </section>
+</body>
+
+</html>
