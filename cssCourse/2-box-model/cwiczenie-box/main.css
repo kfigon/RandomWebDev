@@ -1,0 +1,19 @@
+.box {
+    padding: 5px;
+    margin: 10px;
+    width: 100px;
+    text-align: center;
+    background: rgb(216, 49, 49);
+    border: 3px solid black;
+    color: black;
+    font-weight: bold;
+    font-family: sans-serif;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+div:last-of-type:hover{
+    color: rgb(216, 49, 49);
+    border: 3px solid rgb(216, 49, 49);
+    background: black;
+}
