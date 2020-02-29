@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Lato', sans-serif;
+            background-color: rgb(248, 235, 210);
+        }
+
+        .overview {
+            background: #be3e3e;
+            font-family: inherit;
+            color: rgb(226, 198, 198);
+            padding: 10px 20px;
+        }
+
+        .main-header{
+            background: rgb(85, 184, 85);
+            padding: 10px 20px;
+        }
+        .main-logo-container{
+            display: inline-block;
+        }
+        .main-logo{
+            color: rgb(3, 78, 3);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        /* mamy elementy liniowo, text align na prawo i prawy zajmuje calosc - pierwszy */
+        /* tak bez flexa mozna porozmieszczac elementy */
+        .main-nav {
+            display: inline-block;
+            text-align: right;
+            width: calc(100% - 115px);
+        }
+        .main-nav__items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .main-nav__item {
+            /* zachowuja sie jak inline ale obowiazuja je box model, mozna
+            ustawiac marginesy i paddingi */
+            display: inline-block;
+        }
+        .main-nav__item a {
+            text-decoration: none;
+            font-weight: bolder;
+            margin-left: 4px;
+            padding-bottom: 3px;
+            color: rgb(3, 78, 3);
+        }
+
+        /* pseudo klasa hover */
+        /* oba selektopry maja ten sam styl, zeby nie duplikowac */
+        .main-nav__item a:hover,
+        .main-nav__item a:active {
+            color: rgb(252, 252, 252);
+            font-weight: bold;
+            border-bottom: 2px solid white;
+        }
+
+        .special-button a {
+            /* zaokraglone rogi */
+            border-radius: 20px;
+            background-color: #be3e3e;
+            padding: 4px 8px;
+            color: white
+        }
+
+        .special-button a:hover,
+        .special-button a:active{
+            background-color:white;
+            color: #be3e3e;
+            border: none
+        }
+
+        .plan-selection {
+            margin: 50px;
+        }
+
+        .plan-selection-title{
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .plan {
+            border: 3px rgb(0, 94, 0) solid;
+            background: rgb(30, 100, 3);
+            border-radius: 15px;
+            margin: 10px;
+            display: inline-block;
+            height: 200px;
+            width: 30%;
+            box-shadow: 2px 2px 2px 2px rgb(82, 92, 82);
+            color: wheat;
+        }
+
+        .plan:hover{
+            background-color: rgb(1, 39, 1);
+            border: 3px rgb(1, 39, 1) solid;
+        }
+
+        .plan-name{
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .plan-feature{
+            font-family: 'Lucida Sans', Verdana, sans-serif;
+        }
+
+        .plan-price{
+            text-align: center;
+            font-size: 30px;
+        }
+</style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="main-logo-container"><a class="main-logo" href="#">MY COMPANY</a></div>
+        <nav class="main-nav">
+            <ul class="main-nav__items">
+                <li class="main-nav__item"><a href="https://google.com">Google</a></li>
+                <li class="main-nav__item"><a href="https://wp.pl">WP</a></li>
+                <li class="main-nav__item"><a href="https://udemy.com">Udemy</a></li>
+                <li class="main-nav__item special-button"><a href="https://wykop.pl">Click me!</a></li>
+            </ul>
+        </nav>
+    </header>  
+
+    <section class="overview">
+        <h1>hello from the course!</h1>
+    </section>
+
+    <section class="plan-selection">
+        <h1 class="plan-selection-title">Choose your plan</h1>
+        
+        <div class="plan">
+            <h2 class="plan-name">Free</h2>
+            <ul>
+                <li class="plan-feature">it costs nothing!</li>
+                <li class="plan-feature">basic features</li>
+            </ul>
+            <h3 class="plan-price">0 $</h3>
+        </div>
+        
+        <div class="plan">
+            <h2 class="plan-name">Regular</h2>
+            <ul>
+                <li class="plan-feature">Cheap, effective</li>
+                <li class="plan-feature">For small companies</li>
+            </ul>
+            <h3 class="plan-price">5 $</h3>
+        </div>
+        
+        <div class="plan">
+            <h2 class="plan-name">Premium</h2>
+            <ul>
+                <li class="plan-feature">Full support</li>
+                <li class="plan-feature">On demand features</li>
+            </ul>
+            <h3 class="plan-price">25 $</h3>
+        </div>
+
+    </section>
+
+</body>
+
+</html>
