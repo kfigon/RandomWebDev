@@ -93,8 +93,8 @@
         }
 
         .plan {
-            border: 3px rgb(0, 94, 0) solid;
-            background: rgb(30, 100, 3);
+            border: 2px rgb(2, 83, 2) solid;
+            background: rgb(46, 145, 7);
             border-radius: 15px;
             margin: 10px;
             display: inline-block;
@@ -105,8 +105,9 @@
         }
 
         .plan:hover{
-            background-color: rgb(1, 39, 1);
-            border: 3px rgb(1, 39, 1) solid;
+            background-color: rgb(2, 83, 2);
+            border: 2px rgb(2, 83, 2) solid;
+            cursor: pointer;
         }
 
         .plan-name{
@@ -122,6 +123,35 @@
             text-align: center;
             font-size: 30px;
         }
+
+        .summary-section{
+            background: #be3e3e;
+            color: rgb(226, 198, 198);
+        }
+
+        .summary-section ul{
+            padding: 0;
+            text-align: center;
+        }
+        .summary-section li{
+            list-style: none;
+            display: inline-block;
+            margin: 30px 50px;
+            font-weight: bold;
+        }
+
+        .circle{
+            border: 2px black solid;
+            background-color: rgb(9, 176, 182);
+            width: 50px;
+            height: 50px;
+            /* perfect circle */
+            border-radius: 50%;
+            
+            /* wypelni horyzontalnie! */
+            margin: 0 auto;
+        }
+
 </style>
 </head>
 
@@ -172,7 +202,15 @@
             </ul>
             <h3 class="plan-price">25 $</h3>
         </div>
+    </section>
 
+    <section class="summary-section">
+        <h1 class="plan-selection-title">Many reasons to join us!</h1>
+        <ul>
+            <li><div class="circle"></div><p></p>Many customers</li>
+            <li><div class="circle"></div><p></p>Nice prices</li>
+            <li><div class="circle"></div><p></p>Excelent support!</li>
+        </ul>
     </section>
 
 </body>
