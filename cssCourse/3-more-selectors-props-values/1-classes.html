@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            font-family: sans-serif;
+        }
+        .nav-bar{
+            background: #e67921;
+        }
+        .nav-links{
+            margin: 0;
+            padding: 5px;
+            list-style: none;
+        }
+        .nav-links>li{
+            display: inline-block;
+            margin: 0 5px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-size: 15px;
+        }
+        /* tag a with class="active" */
+        /*  != a .active - descendat! */
+        /* a.active{} */
+
+        a:hover{
+            color:rgba(28, 6, 88, 0.467);
+            font-weight: bold !important /* nadpisuje wszystko */
+        }
+
+        .section {
+            border: black 1px solid;
+            margin-top: 8px;
+            padding: 5px;
+            height: 700px;
+        }
+
+        /* exclude selector, wszystko co jest nie a */
+        :not(a){
+            color: black;
+        }
+        img{
+            margin: 50px 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <ul class="nav-links">
+            <!-- linki do id! -->
+            <li><a href="#intro-section">Intro</a></li>
+            <li><a href="#outro-section">Outro</a></li>
+        </ul>
+    </nav>
+
+    <div class="section" id="intro-section">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum consectetur alias officia architecto vero hic aliquam reprehenderit natus, adipisci voluptatum ratione qui veniam quasi debitis, at cum ut! Beatae, id?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti ipsa placeat nulla vero deserunt fuga vitae laborum at, sed necessitatibus ea odio incidunt enim animi? Neque maxime rem distinctio. Unde.</p>
+        <img src="summary3.png" alt="">
+    </div>
+    <div class="section" id="outro-section">
+        <p>some outro data</p>
+    </div>
+    
+</body>
+</html>

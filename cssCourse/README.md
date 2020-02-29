@@ -12,3 +12,7 @@
 * box-sizing
 * elementy blokowe i liniowe (inline)
 * pseudo-classes/elements https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
+
+# 3-more-classes-selectors-props-values
+* https://caniuse.com/ - co moge uzywac na ktorej przegladarce
+* 
