@@ -1,6 +1,9 @@
+*{
+    box-sizing: border-box;
+}
 .box {
     padding: 5px;
-    margin: 10px;
+    margin: 5px;
     width: 100px;
     text-align: center;
     background: rgb(216, 49, 49);
@@ -10,6 +13,10 @@
     font-family: sans-serif;
     display: inline-block;
     border-radius: 10px;
+}
+
+.box:first-of-type:hover{
+    visibility: hidden;
 }
 
 div:last-of-type:hover{
