@@ -18,4 +18,6 @@ zasoby:
 
 # 3-more-classes-selectors-props-values
 * https://caniuse.com/ - co moge uzywac na ktorej przegladarce
-* 
+
+# 4 basic styling project
+# 5-positioning
