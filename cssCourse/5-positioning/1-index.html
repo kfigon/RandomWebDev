@@ -13,12 +13,50 @@
             font-family: sans-serif;
         }
 
+        .nav-bar {
+            background: rgb(48, 48, 48);
+            /* default - static, top,bottom,l i right nie zadzialaja */
+
+            /*  fixed robi `inline` i umieszcza na stale we viewporcie. 
+            wyjmuje poza flow dokumentu.
+            Aplikuje do dowolnego elementu (blok/liniowy)
+            Przyklejone na stale do gory dokumentu bezwzglednie */
+            position: fixed;
+            width: 100%;
+            top: 0px; 
+            left: 0px;
+            /* z index dziala gdy position != static */
+            z-index: 1;
+        }
+
+        .nav-bar p {
+            display: inline-block;
+            border: white 1px solid;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 5px;
+            box-shadow: white 1px 1px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-bar p:hover{
+            background: white;
+            color: rgb(48, 48, 48);
+        }
 
         .main-container {
             margin: 10px;
             padding: 0;
             border: 1px solid black;
             height: 2000px;
+            
+            z-index: 0;
+            /* absolute - jesli rodzic static - to do viewportu */
+            /* jesli rodzic ma cos innego - to absolute do niego */
+            position: relative;
+            top: 50px;
+
         }
         
         .box {
@@ -27,38 +65,28 @@
             border: black 2px solid;
             width: 50px;
             height: 50px;
+            border-radius: 5px;
         }
 
         .red {
             background: rgb(155, 5, 5);
-            /* default - static, top,bottom,l i right nie zadzialaja */
-            position: fixed;
-
-
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
 
         .green {
             background: rgb(5, 155, 62);
+            position: absolute;
+            top: 80px;
+            right: 150px;
         }
 
         .blue {
             background: rgb(5, 52, 155);
-        }
-
-        .yellow {
-            background: rgb(196, 161, 8);
-        }
-
-        .pink {
-            background: rgb(155, 5, 135);
-        }
-
-        .turq {
-            background: rgb(5, 155, 143);
-        }
-
-        .black {
-            background: black;
+            position: absolute;
+            top: 80px;
+            left: 50px;
         }
 
         .white {
@@ -70,17 +98,18 @@
 
 <body>
 
+    <nav class="nav-bar">
+        <p>first link</p>
+        <p>second link</p>
+        <p>third link</p>
+    </nav>
+
     <div class="main-container">
 
         <div class="box red"></div>
         <div class="box green"></div>
         <div class="box blue"></div>
         <div class="box white"></div>
-        <div class="box yellow"></div>
-        <div class="box black"></div>
-        <div class="box pink"></div>
-        <div class="box turq"></div>
-
     </div>
 </body>
 
