@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+
+        .main-container {
+            margin: 10px;
+            padding: 0;
+            border: 1px solid black;
+            height: 2000px;
+        }
+        
+        .box {
+            margin: 5px;
+            padding: 0;
+            border: black 2px solid;
+            width: 50px;
+            height: 50px;
+        }
+
+        .red {
+            background: rgb(155, 5, 5);
+            /* default - static, top,bottom,l i right nie zadzialaja */
+            position: fixed;
+
+
+        }
+
+        .green {
+            background: rgb(5, 155, 62);
+        }
+
+        .blue {
+            background: rgb(5, 52, 155);
+        }
+
+        .yellow {
+            background: rgb(196, 161, 8);
+        }
+
+        .pink {
+            background: rgb(155, 5, 135);
+        }
+
+        .turq {
+            background: rgb(5, 155, 143);
+        }
+
+        .black {
+            background: black;
+        }
+
+        .white {
+            background: white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <div class="box red"></div>
+        <div class="box green"></div>
+        <div class="box blue"></div>
+        <div class="box white"></div>
+        <div class="box yellow"></div>
+        <div class="box black"></div>
+        <div class="box pink"></div>
+        <div class="box turq"></div>
+
+    </div>
+</body>
+
+</html>
