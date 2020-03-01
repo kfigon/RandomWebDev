@@ -1,3 +1,6 @@
+zasoby:
+* ksiazka Refactoring UI, film tworcy: https://www.youtube.com/watch?v=7Z9rrryIOC4
+
 # 1-basics
 * https://developer.mozilla.org/en-US/docs/Web/CSS
 * https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
