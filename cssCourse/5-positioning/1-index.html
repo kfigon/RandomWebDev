@@ -8,108 +8,81 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             font-family: sans-serif;
         }
+        p {
+            margin: 5px;
+        }
 
-        .nav-bar {
-            background: rgb(48, 48, 48);
-            /* default - static, top,bottom,l i right nie zadzialaja */
+/* absolute - absolutnie do parenta, ktory nie jest static! 
+(jesl jakis rodzic nie ma, to bedzie viewport) */
+        .absolute {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(127, 255, 133);
 
-            /*  fixed robi `inline` i umieszcza na stale we viewporcie. 
-            wyjmuje poza flow dokumentu.
-            Aplikuje do dowolnego elementu (blok/liniowy)
-            Przyklejone na stale do gory dokumentu bezwzglednie */
-            position: fixed;
-            width: 100%;
-            top: 0px; 
-            left: 0px;
-            /* z index dziala gdy position != static */
+/* absolute - removed from doc flow, can be manipulated independently to rest of elements */
+            position: absolute;
+            top: 0;
+            right: 0px;
             z-index: 1;
         }
 
-        .nav-bar p {
-            display: inline-block;
-            border: white 1px solid;
-            border-radius: 5px;
-            margin: 5px;
-            padding: 5px;
-            box-shadow: white 1px 1px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .nav-bar p:hover{
-            background: white;
-            color: rgb(48, 48, 48);
-        }
-
-        .main-container {
-            margin: 10px;
-            padding: 0;
+/* removed from flow, stays relative to viewport, not parent */
+        .fixed {
+            position: fixed;
             border: 1px solid black;
-            height: 2000px;
-            
-            z-index: 0;
-            /* absolute - jesli rodzic static - to do viewportu */
-            /* jesli rodzic ma cos innego - to absolute do niego */
-            position: relative;
-            top: 50px;
-
+            top:0;
+            left: 300px;
+            background: aquamarine;
+            z-index: 3;
         }
-        
-        .box {
-            margin: 5px;
+
+        .relative-container {
+            border: 1px solid black;
+            margin: 0;
             padding: 0;
-            border: black 2px solid;
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
+            height: 2000px;
+
+/* top,left,righ,bottom/z-index just works now. Stays in document flow */
+           position: ab; 
+           left: 30px;
         }
 
-        .red {
-            background: rgb(155, 5, 5);
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+        .absolute-in-parent{
+            border: 1px solid black;
+            margin: 0;
+            padding: 0;
 
-        .green {
-            background: rgb(5, 155, 62);
-            position: absolute;
-            top: 80px;
-            right: 150px;
+           position: absolute; 
+           top: 50px;
+           left: 50px;
         }
-
-        .blue {
-            background: rgb(5, 52, 155);
-            position: absolute;
-            top: 80px;
-            left: 50px;
-        }
-
-        .white {
-            background: white;
-        }
-
+/* sticky - relative til scrolled beyond - then it's fixed */
     </style>
 </head>
 
 <body>
 
-    <nav class="nav-bar">
-        <p>first link</p>
-        <p>second link</p>
-        <p>third link</p>
-    </nav>
+    <div class="absolute">
+        <p>Absolute - without parent (so viewport)</p>
+    </div>
 
-    <div class="main-container">
+    <div class="fixed">
+        <p>fixed to top of doc</p>
+    </div>
 
-        <div class="box red"></div>
-        <div class="box green"></div>
-        <div class="box blue"></div>
-        <div class="box white"></div>
+    <div class="relative-container">
+        <p>Relative container</p>
+        <div class="absolute-in-parent">
+            <p>absolute in parent. 50,50 from parent</p>
+        </div>
+
+        <div class="relative-in-parent">
+            <p>relative in parent, just regular element than can be moved to directions</p>
+        </div>
     </div>
 </body>
 

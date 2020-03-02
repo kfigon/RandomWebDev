@@ -28,3 +28,9 @@
 
 # 4 basic styling project
 # 5-positioning
+* https://css-tricks.com/almanac/properties/p/position/
+* static - default document flow
+* relative - just enables top/left/right/bottom/z-index, stays in doc flow
+* absolute - removed from document flow, positioned to parent or viewport
+* fixed - remove from flow, stick to viewport
+* sticky - relative till scrolled down, then fixed
