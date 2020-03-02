@@ -30,7 +30,7 @@
 # 5-positioning
 * https://css-tricks.com/almanac/properties/p/position/
 * static - default document flow
-* relative - just enables top/left/right/bottom/z-index, stays in doc flow
-* absolute - removed from document flow, positioned to parent or viewport
+* relative - just enables top/left/right/bottom/z-index, stays in doc flow. Moved relatively to it's parent (if static - viewport). Size not changed
+* absolute - removed from document flow, positioned to parent or viewport. Size changed (removed from flow)
 * fixed - remove from flow, stick to viewport
 * sticky - relative till scrolled down, then fixed

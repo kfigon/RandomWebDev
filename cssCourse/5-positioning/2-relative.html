@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .parent {
+            /* gdyby byl absolute to by wjechal czesciowo na <p> */
+            position: relative;
+            top: 50px;
+            left: 50px;
+            border: 2px solid black;
+            height: 250px;
+        }
+
+        .box {
+            border: 2px solid black;
+            background: brown;
+            width: 100px;
+            height: 100px;
+            /* absolute tu nic nie zmieni wzgledem pozycji, ale przesunie
+            inne elementy (bo wyciagnie tego z doc flow) */
+            position: relative;
+            top: 30px;
+            left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>foo</p>
+    
+    <div class="parent">
+        <div class="box"></div>
+    </div>
+</body>
+
+</html>
