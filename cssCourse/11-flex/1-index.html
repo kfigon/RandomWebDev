@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 80px;
+            height: 80px;
+            border: 2px solid black;
+            margin: 0;
+            padding: 0;
+        }
+
+        .regular-spacing{
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <p>only display: flex - block elements will be just placed side by side</p>
+    <div style="display: flex">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+
+    <p>only display: flex - and</p>
+    <div class="regular-spacing">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+</body>
+
+</html>
