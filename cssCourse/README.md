@@ -41,3 +41,23 @@
 
 # 6-background
 * keep in mind you can stack backgrounds on top of another
+* `vertical-align: middle`
+* todo: learn SVGs https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/SVG_and_CSS
+
+# 7-sizes
+* `px`, `cm`,`mm`
+* `%`
+* `em` - em. Refers to font size. Font relative font x em size = final pixels
+* `rem` - root em. Refers to root font size (browser settings only)
+* `vh`/`vm` - viewport height, width
+    * `vmin`,`vmax` - viewport min/max
+* `max-width`/`min-width`
+
+### center elements - `margin: auto`
+
+### Rules for positioning + %
+* element + `position: fixed` - containing block is viewport
+* element + `position: absolute` - containing block is ancestor with `position` != static. Content+padding of ancestor
+* element + `static/relative` - containing block is ancestor which is a block level element. Content only of ancestor
+
+# 8-js

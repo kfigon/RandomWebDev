@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        div{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px;
+        }
+        .pix{
+            width: 30px;
+            height: 30px;
+            font-size: 12px;
+        }
+        /* dobrze sie skaluje gdy w przegladarce user zmieni rozmiar czcionki */
+        /* 3em - 3 x rozmiar czcionki w tym elemencie lub rodzicu, zaleznie co nadpisane w pixelach*/
+        /* font-size - 10px, width 2em->20px */
+        .em {
+            width: 3em;
+            height: 3em;
+            font-size: 12px;
+        }
+        /* em, ale do roota, nie mnozy w kolko jak em w dziedziczeniu. Tylko z przegladarki */
+        .rem{
+            width: 3em;
+            height: 3em;
+        }
+        /* % viewportu, skalowalne */
+        .vp{
+            width: 50vw;
+            height: 50vh;
+        }
+        /* procent mniejszej skladowej viewportu - na desktopie height, mobilka width */
+        .vmin {
+            width: 50vmin;
+            height: 10vmin;
+        }
+        img{
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="pix">30px</div>
+    <div class="em">Em size!</div>
+    <div class="rem">Rem size!</div>
+    <div class="vp">viewport</div>
+    <div class="vmin">viewport min</div>
+    <img src="summary7.png">
+    <img src="summary71.png">
+
+</body>
+
+</html>

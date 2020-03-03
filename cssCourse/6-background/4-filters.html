@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .img{
+            width: 200px;
+            height: 200px;
+            background: url("background-img.jpg");
+            background-size: cover;
+            margin-top: 10px;
+        }
+        .inverted {
+            filter: invert();
+        }
+        .gray {
+            filter: grayscale();
+        }
+        .saturate{
+            filter: saturate(10);
+        }
+    </style>
+</head>
+<body>
+    <div class="img inverted"></div>
+    <div class="img gray"></div>
+    <div class="img saturate"></div>
+</body>
+</html>
