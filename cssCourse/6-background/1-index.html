@@ -1,11 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
-        
+        .image {
+            background-image: url("background-img.jpg");
+            width: 100%;
+            height: 800px;
+        }
+
+        .repeated {
+            background-repeat: repeat;
+            background-size: 100px;
+        }
+
+        .disorted {
+            background-repeat: no-repeat;
+            /* nie trzyma aspect ratio*/
+            background-size: 300px 100px;
+        }
+
+        .full-size {
+            background-repeat: no-repeat;
+            background-size: 100%;
+            /* przesuwanie wzgledem kontenera. wzgledem origin*/
+            /* background-position: 30px; */
+            background-origin: border-box;
+            /* scrolluje razem z viewportem */
+            /* background-attachment: fixed; */
+        }
+
+        .auto-fill {
+            background-repeat: no-repeat;
+            /* dopasuje ktora wspolrzedna ma byc poprawna, wypelni caly kontener */
+            background-size: cover;
+        }
+
+        .styled-image {
+            /* wazne zeby rozmiar byl na img, nie na kontenerze - nie zadziala! */
+            /* chyba ze inline block */
+
+            /* skala zachowana */
+            width: 150px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        p {
+            display: inline-block;
+        }
     </style>
 </head>
+
 <body>
+    <!-- <img src="background-img.jpg"/> -->
+    <img src="background-img.jpg" class="styled-image" />
+    <p>some text for image</p>
     
+    <div class="gradient"></div>
+    <hr>
+    <div class="image full-size"></div>
 </body>
+
 </html>
