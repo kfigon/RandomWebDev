@@ -61,3 +61,6 @@
 * element + `static/relative` - containing block is ancestor which is a block level element. Content only of ancestor
 
 # 8-js
+* modal demo
+# 9-responsive design - todo!
+# 10-forms
