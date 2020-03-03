@@ -40,3 +40,4 @@
 * https://developer.mozilla.org/en-US/docs/Web/CSS/position
 
 # 6-background
+* keep in mind you can stack backgrounds on top of another
