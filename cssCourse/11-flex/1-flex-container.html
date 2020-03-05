@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 80px;
+            height: 80px;
+            border: 2px solid black;
+            margin: 0;
+            padding: 0;
+        }
+
+        .small-box {
+            width: 80px;
+            height: 30px;
+            border: 2px solid black;
+            margin: 0;
+            padding: 0;
+        }
+
+        .big-box {
+            width: 300px;
+            height: 80px;
+            border: 2px solid black;
+            margin: 10px;
+            padding: 0;
+        }
+
+        code {
+            color: rgb(136, 9, 35);
+            font-weight: bold;
+        }
+
+        .wrapped {
+            /* inline-flex - kontener zajmuje szerokosc ile dzieci, a w srodku flex items */
+            /* flex - kontener zajmuje cala szerokosc i skaluje dzieci */
+            display: flex;
+            /* wrap-reverse */
+            flex-wrap: wrap;
+        }
+
+        .columns {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .aligned-center {
+            display: flex;
+            /* flex-direction: column; */
+            align-items: center;
+        }
+
+        .justify-center {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <p>only <code>display: flex</code> - block elements will be just placed side by side</p>
+    <p>z automatu daje <code>flex-direction: row</code> oraz <code>flex-wrap: nowrap</code></p>
+    <p>Main axis - pozioma</p>
+    <p>cross - pionowa</p>
+    <div style="display: flex">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+    <hr>
+    <p>wrap - elementy przechodza do nastepnej linii</p>
+    <p>beda wrapowac od konca main-axis</p>
+    <div class="wrapped">
+        <div class="big-box">1</div>
+        <div class="big-box">2</div>
+        <div class="big-box">3</div>
+    </div>
+    <hr>
+    <p>flex-direction: column. Po ktorej osi maja sie ukladac elementy</p>
+    <p>Main axis - pionowa</p>
+    <p>cross - pozioma</p>
+    <p>reversed flow - z prawej do lewej pozioma - main</p>
+    <div class="columns">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+    <hr>
+    <p><code>align-items</code> -> alignuje do cross axis. Column zrobi do srodka</p>
+    <p>flex-start -> align od poczatku cross axis</p>
+    <div class="aligned-center">
+        <div class="small-box">1</div>
+        <div class="box">2</div>
+        <div class="small-box">3</div>
+    </div>
+
+    <hr>
+    <p><code>justify-content</code> - align do main axis</p>
+    <div class="justify-center">
+        <div class="small-box">1</div>
+        <div class="box">2</div>
+        <div class="small-box">3</div>
+    </div>
+    <hr>
+
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <img src="summary-align-justify.png" alt="">
+    </div>
+</body>
+
+</html>

@@ -64,3 +64,14 @@
 * modal demo
 # 9-responsive design - todo!
 # 10-forms
+# 11-flex
+https://developer.mozilla.org/pl/docs/Learn/CSS/CSS_layout/Flexbox
+* parent props:
+    * flex-direction, flex-wrap => flex-flow
+    * justify-content - 
+    * align-content
+    * align-items
+* childrens (flex items) properties:
+    * order
+    * flex
+    * align-self
