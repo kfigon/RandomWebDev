@@ -72,8 +72,10 @@ https://css-tricks.com/snippets/css/a-guide-to-flexbox/
     * flex-direction, flex-wrap => flex-flow. Axis directions
     * justify-content - align over main axis
     * align-items - align over cross axis
-    * align-content - 
+    * align-content - align multiline rows
 * childrens (flex items) properties:
+    * align-self - override align items
     * order
-    * flex
-    * align-self
+    * flex-grow, flex-shrink, flex-basis =>flex
+    
+    
