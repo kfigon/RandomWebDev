@@ -25,6 +25,22 @@ test('some logic', () => {
     expect(foo(1,3)).toBe('>3');
 });
 
+test('typeof test', () =>{
+    expect(typeof 'foo').toBe('string');
+    expect(typeof []).toBe('object');
+    expect(typeof {}).toBe('object');
+    expect(typeof null).toBe('object');
+    expect(typeof undefined).toBe('undefined');
+    expect(typeof NaN).toBe('number');
+
+    function foo(params) {}
+    expect(typeof foo).toBe('function');
+
+    const lambda = () => {};
+    expect(typeof lambda).toBe('function');
+});
+
+
 test('array', ()=>{
     let ar = [1,2,3,4,5];
     const another = ar.map((x)=> { return x*2; });

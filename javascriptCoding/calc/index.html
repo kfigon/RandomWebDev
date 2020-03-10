@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>Calc!</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- download wczesnie, ale nie blokuj parsowania. 
+        Wykonaj dopiero gdy html sparsowany -->
+    <script src="script.js" defer></script>
+    <!-- jest jeszcze async - execute while downloaded, not waits for html is parsed -->
 </head>
 
 <body>
@@ -22,7 +27,10 @@
             <div class="button" onclick="mult()">*</div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- mozna tak dolaczyc plik, bo najpier render, potem dolaczenie skryptu
+    ale lepiej dolaczyc je wczesnie, a wykonac dopiero po renderze -->
+    <!-- <script src="script.js"></script> -->
 </body>
 
 </html>
