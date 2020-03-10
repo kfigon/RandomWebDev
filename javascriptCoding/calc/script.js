@@ -7,6 +7,9 @@ function performOperation(foo) {
     const first = document.getElementById('first-operand').value;
     const second = document.getElementById('second-operand').value;
     if(second && first) {
+        // conversion string->int
+        // let foo = '43';
+        // let num = +foo
         setResult(foo(parseInt(first), parseInt(second)));
     }
 }
