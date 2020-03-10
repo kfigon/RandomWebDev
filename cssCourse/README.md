@@ -65,12 +65,14 @@
 # 9-responsive design - todo!
 # 10-forms
 # 11-flex
-https://developer.mozilla.org/pl/docs/Learn/CSS/CSS_layout/Flexbox
+http://flexboxfroggy.com/#pl
+http://www.flexboxdefense.com/
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 * parent props:
-    * flex-direction, flex-wrap => flex-flow
-    * justify-content - 
-    * align-content
-    * align-items
+    * flex-direction, flex-wrap => flex-flow. Axis directions
+    * justify-content - align over main axis
+    * align-items - align over cross axis
+    * align-content - 
 * childrens (flex items) properties:
     * order
     * flex
