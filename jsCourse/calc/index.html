@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calc!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="calc">
+        <h1>Calc!</h1>
+        <div class="inputs">
+            <input type="number" id="first-operand" />
+            <input type="number" id="second-operand" />
+            <input disabled type="number" id="result" />
+        </div>
+        <div class="buttons">
+            <div class="button" onclick="add()">+</div>
+            <div class="button" onclick="minus()">-</div>
+            <div class="button" onclick="div()">/</div>
+            <div class="button" onclick="mult()">*</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
