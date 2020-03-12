@@ -1,13 +1,5 @@
 // run with npm run test/npm test
 
-test('for loop', () => {
-    let sum = 0;
-    for(let i=0; i<5; i++)
-        sum+=i;
-
-    expect(sum).toBe(10);
-});
-
 test('some logic', () => {
     const a= true;
     const b = false;
@@ -49,7 +41,7 @@ test('array', ()=>{
     expect(another).toStrictEqual([2,4,6,8,10]);
 });
 
-test('for each', () => {
+test('for of (each)', () => {
     const ar = [1,2,3,4,5];
     let s=0;
     for(let i of ar)
@@ -58,9 +50,79 @@ test('for each', () => {
     expect(s).toBe(15);
 });
 
+test('for loop', () => {
+    let sum = 0;
+    for(let i=0; i<5; i++)
+        sum+=i;
+
+    expect(sum).toBe(10);
+});
+
+test('for in loop', ()=>{
+    const obj={
+        x:15,
+        y:3
+    }
+    let sum = 0;
+    for(const key in obj) {
+        sum += obj[key];
+    }
+
+    expect(sum).toBe(18);
+})
+
 // testy parametryczne
 for(let i=0; i<5; i++) {
     test('test '+i, () => {
         expect(i).toBe(i);
     });
 }
+
+test('boolean magic', ()=> {
+    const someValue = "Hello!";
+    const nullValue = null;
+    
+    const getSomethingOrDefault = null || someValue;
+    const castToBoolean = !!someValue;
+    const getSomethingAfterAllChecked = someValue && "value123";
+
+    expect(getSomethingOrDefault).toBe("Hello!");
+    expect(castToBoolean).toBe(true);
+    expect(getSomethingAfterAllChecked).toBe("value123");
+});
+
+test('exceptions', ()=>{
+    const failWIthString = () => {
+        throw 'myException';
+    }
+
+    const failWithNumber = () => {
+        throw 123;
+    }
+    const failWithObject = () =>{
+        throw {message: 'oops'};
+    }
+
+    try {
+        failWIthString();
+    }
+    catch(ex) {
+        expect(ex).toBe('myException');
+    }
+
+    try {
+        failWithNumber();
+    }
+    catch(ex) {
+        expect(ex).toBe(123);
+    }
+    
+    try {
+        failWithObject();
+    }
+    catch(ex) {
+        expect(ex.message).toBe('oops');
+    }finally{
+        expect(true).toBe(true);
+    }
+});
