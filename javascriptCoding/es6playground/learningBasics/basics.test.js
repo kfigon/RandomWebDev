@@ -169,3 +169,48 @@ test('function fun', ()=>{
     expect(foo()).toBe(6);
 });
 
+test('varargs - rest operator', () => {
+
+    const foo = (...nums)=> {
+        let sum = 0;
+        for(const el of nums){
+            sum+=el;
+        }
+        return sum;
+    };
+    expect(foo(1,2,3,4)).toBe(10);
+    expect(foo(1,2,3)).toBe(6);
+
+    
+    const foo2 = (x, ...nums) =>  nums.reduce((a,b) => a+b) * x;
+
+    expect(foo2(0,2,3,4)).toBe(0);
+    expect(foo2(2, 1,2,3)).toBe(12);
+});
+
+test('varargs before rest operator', ()=> {
+    // tylko funkcje, arrow nie!
+    function foo() {
+        let sum = 0;
+        for(const el of arguments){
+            sum += el;
+        }
+        return sum;
+    }
+
+    expect(foo(1,2,3,4)).toBe(10);
+});
+
+test('bind', ()=> {
+    const foo = (a,b)=>{
+        return a+b;
+    };
+
+    // bindujemy argument, preconfigured function. moze byc czesc argumentow albo wszystkie
+    const newFoo = foo.bind(this, 1,2);
+    expect(newFoo()).toBe(3);
+
+    const barz = foo.bind(this, 1);
+    expect(barz(3)).toBe(4);
+
+});
