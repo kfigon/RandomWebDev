@@ -7,7 +7,7 @@ test('some logic', () => {
     expect(a).toBe(true);
     expect(b && a).toBe(false);
 
-    let foo = (x,y) => {
+    const foo = (x,y) => {
         return x+y > 3 ?
         '>3' : 
         '<=3';
@@ -90,6 +90,7 @@ test('boolean magic', ()=> {
     expect(castToBoolean).toBe(true);
     expect(getSomethingAfterAllChecked).toBe("value123");
 });
+
 
 test('exceptions', ()=>{
     const failWIthString = () => {

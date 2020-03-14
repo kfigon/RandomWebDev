@@ -8,3 +8,12 @@ console.log(asd);
 function fun(a) {
     return a+globalFoo;
 }
+
+
+//  undefined, not an error
+console.log(variable);
+var variable = 123;
+
+//  error
+// console.log(variable2);
+// let variable2 = 123;
