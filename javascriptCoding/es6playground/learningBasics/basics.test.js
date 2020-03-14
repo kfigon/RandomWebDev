@@ -127,3 +127,45 @@ test('exceptions', ()=>{
         expect(true).toBe(true);
     }
 });
+
+test('reference and values', ()=>{
+    // primitives
+    let num = 1;
+    const foo=(x)=> x = 2;
+    foo(num);
+    expect(num).toBe(1);
+
+    let str = 'asd';
+    const foo2=(x)=> x = 'fooo';
+    foo2(str);
+    expect(str).toBe('asd');
+
+// reference
+    let obj = {foo:'asd'};
+    const foo3=(x)=> x.foo = 'fooo';
+    foo3(obj);
+    expect(obj.foo).toBe('fooo');
+});
+
+test('function fun', ()=>{
+    // expression. Name is optional. Anonymous fun
+    const start = function startGame() {}
+    // startGame(); will fail
+    start();
+    
+    // declaration
+    function stop() {}
+
+    // roznica - declaration bedzie hoistowane, 
+    // expression jest hoistowane, 
+    // ale nie inicjalizowane, bedzue undefined gdy zawolane
+    // gdy fun jest umieszczone ponizej wywolania. TO samo co z var
+
+    // w arrows tez dziala
+    function foo(x=5) {
+        return x+1;
+    }
+    expect(foo(6)).toBe(7);
+    expect(foo()).toBe(6);
+});
+
