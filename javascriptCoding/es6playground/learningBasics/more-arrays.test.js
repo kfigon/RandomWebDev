@@ -115,6 +115,7 @@ test('spread operator', ()=>{
     // deep copy mozna zrobic [...arrOfObjects.map()] i kopiowac 
 });
 
+// same for objects: const { name } = movie // here name of property is important
 test('array destructuring', ()=>{
     // podobnie jak w pythonie
     const names=['Foo', 'Bar', "asd", 'sad'];

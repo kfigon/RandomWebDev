@@ -82,7 +82,7 @@ test('boolean magic', ()=> {
     const someValue = "Hello!";
     const nullValue = null;
     
-    const getSomethingOrDefault = null || someValue;
+    const getSomethingOrDefault = nullValue || someValue;
     const castToBoolean = !!someValue;
     const getSomethingAfterAllChecked = someValue && "value123";
 
@@ -213,4 +213,34 @@ test('bind', ()=> {
     const barz = foo.bind(this, 1);
     expect(barz(3)).toBe(4);
 
+});
+
+test('spread operator for objects', ()=>{
+    const o1 = {
+        name: 'foo',
+        age: 123
+    };
+
+    // const o2 = Object.assign({}, o1); // alternative - shallow copy 
+    // shallow copy, primitives and references copied.
+    const o2 = {...o1};
+    o2.name='bar';
+    expect(o1.name).toBe('foo');
+    expect(o1.age).toBe(123);
+
+    expect(o2.name).toBe('bar');
+    expect(o2.age).toBe(123);
+
+    // overriding - even reference vals
+    const o3={...o1, age:321  // override age
+        // hobbies: [...o1.hobbies] - shallow copy of some reference field
+    };
+});
+
+test('object destructuring', ()=>{
+    // like in arrays, rest operator also works
+    const a ={name:'foo', age:123, someStuff:'dsadas'};
+    const {name} = a; 
+    // const {name, ...otherProps} = a;
+    expect(name).toBe('foo');
 });
