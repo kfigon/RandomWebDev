@@ -91,6 +91,12 @@ test('boolean magic', ()=> {
     expect(getSomethingAfterAllChecked).toBe("value123");
 });
 
+test('string templates', ()=>{
+    const myData = 'Asd';
+    // `, not ' and "
+    const str = `my name is ${myData}, hello!`;
+    expect(str).toBe('my name is Asd, hello!');
+});
 
 test('exceptions', ()=>{
     const failWIthString = () => {

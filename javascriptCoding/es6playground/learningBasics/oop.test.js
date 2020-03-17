@@ -42,3 +42,15 @@ test('inheritance - constructor inheritance, fields', ()=>{
     expect(d.newfield).toBe('foo')
 });
 
+test('statics',()=>{
+    class Foo{
+        // static somefield = 'sad'; not work in this kind of inner class
+        static method() {
+            return 'asd';
+        }
+    }
+
+    expect(Foo.method()).toBe("asd");
+    // expect(Foo.somefield).toBe("sad");
+});
+
