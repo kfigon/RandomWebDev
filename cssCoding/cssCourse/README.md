@@ -8,6 +8,7 @@
 * galerie: 
     * https://land-book.com/
     * https://dribbble.com/
+* https://learnlayout.com/ - layout!
 
 # 1-basics
 * https://developer.mozilla.org/en-US/docs/Web/CSS
