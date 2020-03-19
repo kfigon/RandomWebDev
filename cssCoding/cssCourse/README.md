@@ -33,7 +33,7 @@
 * https://css-tricks.com/almanac/properties/p/position/
 * `static` - default document flow
 * `relative` - just enables top/left/right/bottom/z-index, stays in doc flow. Moved relatively to it's parent (if static - html). Size not changed. `Overflow: hidden` - hides if element is moved outside parent.
-* `absolute` - removed from document flow, positioned to parent or html. Size changed (removed from flow)
+* `absolute` - removed from document flow, positioned to parent or html. Size changed (removed from flow). Like fixed but relative to non-static ancestor.
 * `fixed` - remove from flow, stick to viewport. Moving when scroll
 * `sticky` - relative till scrolled down, then fixed. Relative + fixed
 ### links:
