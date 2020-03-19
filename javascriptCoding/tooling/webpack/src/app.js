@@ -4,9 +4,13 @@
 // add config and add build script in package.json
 
 // will bundle sources, minify scripts
-
+// live dev server!
 // npm run build
+// npm run build:dev
 
 import {foo} from './utils'
 
 console.log(foo());
+
+const el = document.getElementById('main');
+el.innerText='AAAAAAA'
