@@ -1,11 +1,12 @@
 # Zasoby:
 * udemy: https://www.udemy.com/course/css-the-complete-guide-incl-flexbox-grid-sass/
 * ksiazka Refactoring UI, film tworcy: https://www.youtube.com/watch?v=7Z9rrryIOC4
-* https://enjoycss.com/
+* https://enjoycss.com/ - generator
 * stockowe zdjecia: https://unsplash.com/
 * kompresja zdjec: https://tinyjpg.com/
 * palety kolorow: https://www.dtelepathy.com/blog/inspiration/beautiful-color-palettes-for-your-next-web-project
 * galerie: 
+    * http://www.csszengarden.com/
     * https://land-book.com/
     * https://dribbble.com/
 * https://learnlayout.com/ - layout!
