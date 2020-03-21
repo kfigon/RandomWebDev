@@ -1,12 +1,13 @@
 {
-  "name": "nodewithtypescipt",
+  "name": "typescript-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "build:w": "tsc -w"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC"
 }
