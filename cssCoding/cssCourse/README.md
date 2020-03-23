@@ -7,7 +7,7 @@
 * palety kolorow: https://www.dtelepathy.com/blog/inspiration/beautiful-color-palettes-for-your-next-web-project
 * galerie: 
     * http://www.csszengarden.com/
-    * https://land-book.com/
+    * https://tympanus.net/codrops/
     * https://dribbble.com/
 * https://learnlayout.com/ - layout!
 

@@ -8,3 +8,4 @@
 * run package.json script:
     * yarn run <script_name>
     * yarn <script_name>
+* npm install package --save-dev == yarn add package --dev
