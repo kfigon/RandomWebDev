@@ -67,9 +67,11 @@
 # 9-responsive design - todo!
 # 10-forms
 # 11-flex
-http://flexboxfroggy.com/#pl
-http://www.flexboxdefense.com/
-https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+* http://flexboxfroggy.com/#pl
+* http://www.flexboxdefense.com/
+* https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+## properties:
 * parent props:
     * flex-direction, flex-wrap => flex-flow. Axis directions
     * justify-content - align over main axis

@@ -72,11 +72,13 @@ test('for in loop', ()=>{
 })
 
 // testy parametryczne
-for(let i=0; i<5; i++) {
-    test('test '+i, () => {
-        expect(i).toBe(i);
-    });
-}
+test.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3],
+])('.add(%i, %i)', (a, b, expected) => {
+  expect(a + b).toBe(expected);
+});
 
 test('boolean magic', ()=> {
     const someValue = "Hello!";
