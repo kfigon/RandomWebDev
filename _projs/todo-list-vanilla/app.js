@@ -1,15 +1,25 @@
 "use strict";
-var tasks = [
-    'add insert to list on enter',
-    'styling',
-    'mark as done'
-];
+var Tasks = /** @class */ (function () {
+    function Tasks() {
+        this.tasks = [];
+    }
+    Tasks.prototype.addTask = function (task) {
+        this.tasks.push(task);
+    };
+    Tasks.prototype.removeTask = function (task) {
+        this.tasks = this.tasks.filter(function (el) { return task !== el; });
+    };
+    return Tasks;
+}());
+var tasks = new Tasks();
 function init() {
     var _a;
-    (_a = document.getElementById('add-task')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', handleOnclick);
-    tasks.forEach(function (t) { return addTask(t); });
+    (_a = document.getElementById('add-task')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', handleNewTask);
+    ['add insert to list on enter',
+        'styling',
+        'mark as done'].forEach(function (t) { return addTask(t); });
 }
-function handleOnclick() {
+function handleNewTask() {
     var inputElement = document.getElementById('task-name');
     if (!inputElement || !inputElement.value)
         return;
@@ -19,26 +29,27 @@ function handleOnclick() {
     addTask(inputElement.value);
     inputElement.value = '';
 }
-function clearTasks(task) {
-    var _a, _b;
+function clearTask(task) {
     var list = document.getElementById('tasks');
     if (!list)
         return;
-    tasks = tasks.filter(function (el) { return task !== el; });
+    tasks.removeTask(task);
     var nodeToRemove = list.firstChild;
-    while (((_a = nodeToRemove) === null || _a === void 0 ? void 0 : _a.textContent) !== task) {
-        nodeToRemove = nodeToRemove && ((_b = nodeToRemove) === null || _b === void 0 ? void 0 : _b.nextSibling);
+    while (nodeToRemove && nodeToRemove.textContent !== task) {
+        nodeToRemove = nodeToRemove.nextSibling;
     }
-    list.removeChild(nodeToRemove);
+    if (nodeToRemove) {
+        list.removeChild(nodeToRemove);
+    }
 }
 function addTask(newTask) {
     var list = document.getElementById('tasks');
     if (!list)
         return;
-    tasks.push(newTask);
+    tasks.addTask(newTask);
     var newNode = document.createElement('li');
     newNode.textContent = newTask;
-    newNode.addEventListener('click', function () { return clearTasks(newTask); });
+    newNode.addEventListener('click', function () { return clearTask(newTask); });
     list.appendChild(newNode);
 }
 init();
