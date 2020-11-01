@@ -14,12 +14,14 @@ var Tasks = /** @class */ (function () {
 var tasks = new Tasks();
 function init() {
     var _a;
-    (_a = document.getElementById('add-task')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', handleNewTask);
-    ['add insert to list on enter',
-        'styling',
+    (_a = document.getElementById('task-name')) === null || _a === void 0 ? void 0 : _a.addEventListener('keydown', handleNewTask);
+    ['styling',
         'mark as done'].forEach(function (t) { return addTask(t); });
 }
-function handleNewTask() {
+function handleNewTask(e) {
+    if (e.key !== 'Enter') {
+        return;
+    }
     var inputElement = document.getElementById('task-name');
     if (!inputElement || !inputElement.value)
         return;
@@ -38,9 +40,8 @@ function clearTask(task) {
     while (nodeToRemove && nodeToRemove.textContent !== task) {
         nodeToRemove = nodeToRemove.nextSibling;
     }
-    if (nodeToRemove) {
+    if (nodeToRemove)
         list.removeChild(nodeToRemove);
-    }
 }
 function addTask(newTask) {
     var list = document.getElementById('tasks');

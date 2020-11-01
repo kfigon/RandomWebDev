@@ -13,14 +13,16 @@ class Tasks {
 let tasks = new Tasks();
 
 function init() {
-    document.getElementById('add-task')?.addEventListener('click', handleNewTask);
+    document.getElementById('task-name')?.addEventListener('keydown', handleNewTask);
 
-    ['add insert to list on enter',
-        'styling',
+    ['styling',
         'mark as done'].forEach(t => addTask(t));
 }
 
-function handleNewTask() {
+function handleNewTask(e: any) {
+    if (e.key !== 'Enter') {
+        return
+    }
     const inputElement: HTMLInputElement | null = <HTMLInputElement>document.getElementById('task-name');
     if (!inputElement || !inputElement.value) return;
 
@@ -39,12 +41,10 @@ function clearTask(task: string) {
 
     let nodeToRemove = list.firstChild;
     while (nodeToRemove && nodeToRemove.textContent !== task) {
-        nodeToRemove =  nodeToRemove.nextSibling;
+        nodeToRemove = nodeToRemove.nextSibling;
     }
-    
-    if(nodeToRemove){
-        list.removeChild(nodeToRemove);
-    }
+
+    if (nodeToRemove) list.removeChild(nodeToRemove);
 }
 
 function addTask(newTask: string) {
