@@ -1,38 +1,46 @@
-function addTask() {
-    const task = readTask();
-    if(task) addElement(task);
+let tasks: Array<string> = [
+    'add insert to list on enter',
+    'styling',
+    'mark as done'
+];
+
+function init() {
+    document.getElementById('add-task')?.addEventListener('click', handleOnclick);
+    tasks.forEach(t => addTask(t))
 }
 
-function addElement(name: string) {
-    if(!name) {
-        return;
+function handleOnclick() {
+    const inputElement: HTMLInputElement | null = <HTMLInputElement>document.getElementById('task-name');
+    if(!inputElement || !inputElement.value) return;    
+    
+    const list: HTMLElement | null = document.getElementById('tasks');
+    if(!list) return;
+    
+    addTask(inputElement.value);
+    inputElement.value = '';
+}
+function clearTasks(task: string) {
+    const list: HTMLElement | null = document.getElementById('tasks');
+    if(!list) return;    
+
+    tasks = tasks.filter((el) => task !== el);
+    let nodeToRemove = list.firstChild;
+    while(nodeToRemove?.textContent !== task) {
+        nodeToRemove = nodeToRemove && nodeToRemove?.nextSibling;
     }
-
-    const el: HTMLElement | null = document.getElementById('tasks');
-    if(!el) {
-        return;
-    }
-
-    const newChild: Element = document.createElement('li');
-    newChild.textContent = name;
-    newChild.addEventListener('click', () => markTask(newChild));
-    el.appendChild(newChild);
+    list.removeChild(nodeToRemove);
 }
 
-function markTask(foo: Element) {
-    console.log(foo);
-    foo.classList.toggle('strk')
+function addTask(newTask: string) {
+    const list: HTMLElement | null = document.getElementById('tasks');
+
+    if(!list) return;
+    tasks.push(newTask);
+    
+    const newNode = document.createElement('li');
+    newNode.textContent = newTask;
+    newNode.addEventListener('click', () => clearTasks(newTask));
+    list.appendChild(newNode);
 }
 
-function readTask() : string | null {
-    const el: HTMLInputElement | null = <HTMLInputElement>document.getElementById('task-name');
-
-    if(!el || !el.value) {
-        console.log('not found');
-        return null;
-    }
-
-    const toRet = el.value;
-    el.value = '';
-    return toRet;
-}
+init();
