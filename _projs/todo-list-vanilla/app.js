@@ -4,7 +4,11 @@ var Tasks = /** @class */ (function () {
         this.tasks = [];
     }
     Tasks.prototype.addTask = function (task) {
-        this.tasks.push(task);
+        if (this.tasks.indexOf(task) === -1) {
+            this.tasks.push(task);
+            return true;
+        }
+        return false;
     };
     Tasks.prototype.removeTask = function (task) {
         this.tasks = this.tasks.filter(function (el) { return task !== el; });
@@ -47,7 +51,8 @@ function addTask(newTask) {
     var list = document.getElementById('tasks');
     if (!list)
         return;
-    tasks.addTask(newTask);
+    if (!tasks.addTask(newTask))
+        return;
     var newNode = document.createElement('li');
     newNode.textContent = newTask;
     newNode.addEventListener('click', function () { return clearTask(newTask); });

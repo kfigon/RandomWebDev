@@ -3,8 +3,12 @@ class Tasks {
     constructor() {
         this.tasks = [];
     }
-    addTask(task: string) {
-        this.tasks.push(task);
+    addTask(task: string): boolean {
+        if (this.tasks.indexOf(task) === -1) {
+            this.tasks.push(task);
+            return true
+        }
+        return false;
     }
     removeTask(task: string) {
         this.tasks = this.tasks.filter((el) => task !== el);
@@ -52,7 +56,7 @@ function addTask(newTask: string) {
 
     if (!list) return;
 
-    tasks.addTask(newTask);
+    if(!tasks.addTask(newTask)) return;
 
     const newNode = document.createElement('li');
     newNode.textContent = newTask;
