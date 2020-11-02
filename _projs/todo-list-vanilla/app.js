@@ -19,8 +19,8 @@ var tasks = new Tasks();
 function init() {
     var _a;
     (_a = document.getElementById('task-name')) === null || _a === void 0 ? void 0 : _a.addEventListener('keydown', handleNewTask);
-    ['styling',
-        'mark as done'].forEach(function (t) { return addTask(t); });
+    ['Some',
+        'Things to do!'].forEach(function (t) { return addTask(t); });
 }
 function handleNewTask(e) {
     if (e.key !== 'Enter') {
