@@ -108,3 +108,39 @@ const add = (a,b) => a+b;
 const partial = (fun, param) => (otherParam) => fun(param, otherParam);
 const add3 = partial(add, 3);
 console.log(add3(2));
+
+
+// pure functions - have input params, no state, no side effects, returns something only based on input
+// impure functions (procedures)
+
+// impure:
+let cnt = 0;
+function inc() {
+    cnt++;
+}
+
+// pure
+function increment(counter) {
+    return counter + 1;
+}
+
+
+// ================== function composition
+// use curry to compose functions
+const compose = (fun1, fun2) => (arg) => fun2(fun1(arg));
+const slice = (apple) => 'sliced '+ apple
+const bake = (slicedApple) => 'baked '+ slicedApple
+const makePie = compose(bake, slice);
+const pie = makePie('apple');
+console.log(pie);
+console.log('\n');
+
+// solve that using composition:
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
+const wordList = lorem.split(' ');
+const wordCount = wordList.length;
+console.log('word count: ' + wordCount);
+
+const split = (splitter) => (word) => word.split(splitter);
+const count = (words) => words.length;
+console.log('word count composed: ' + compose(split(' '), count)(lorem));
