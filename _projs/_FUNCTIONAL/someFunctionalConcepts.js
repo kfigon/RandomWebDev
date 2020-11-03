@@ -130,7 +130,7 @@ function increment(counter) {
 const compose = (fun1, fun2) => (arg) => fun2(fun1(arg));
 const slice = (apple) => 'sliced '+ apple
 const bake = (slicedApple) => 'baked '+ slicedApple
-const makePie = compose(bake, slice);
+const makePie = compose(slice, bake);
 const pie = makePie('apple');
 console.log(pie);
 console.log('\n');
@@ -144,3 +144,6 @@ console.log('word count: ' + wordCount);
 const split = (splitter) => (word) => word.split(splitter);
 const count = (words) => words.length;
 console.log('word count composed: ' + compose(split(' '), count)(lorem));
+
+const splitBySpace = split(' ');
+console.log('word count composed v2: ' + compose(splitBySpace, count)(lorem));
