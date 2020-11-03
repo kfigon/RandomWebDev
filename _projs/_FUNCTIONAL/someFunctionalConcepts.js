@@ -66,9 +66,11 @@ console.log('podsumowanie ocen:');
 console.log(procenty.reduce(groupByGrade, defaultAccumulator));
 
 
+// higher order function
+// fun that takes another function as param or returns a function
 
 
-//========== currying (using closure)
+//========== currying (using closure) and partial application
 // A curried function is a function that takes multiple arguments one at a time - using closure
 function greeting(greeting, name) {
     return `${greeting} ${name}`;
@@ -77,7 +79,7 @@ function greeting(greeting, name) {
 // how to prepopulate function with argument?
 const friends = ['Nate', 'Jim', 'Bob', 'Foo'];
 
-// predefine using lambda
+// predefine using lambda - specialized application
 const greet = friend => greeting('Hi there', friend); // return a function result with closured param friend
 
 // or return a function
@@ -86,6 +88,23 @@ function greet2(greeting){
         return `${greeting} ${name}`;
     }
 }
-console.log(friends.map(greet)); //[ 'Hi there Nate', 'Hi there Jim', 'Hi there Bob', 'Hi there Foo' ]
-console.log(friends.map(greet2('Yo my man'))); //[ 'Yo my man Nate', 'Yo my man Jim', 'Yo my man Bob', 'Yo my man Foo' ]
 
+const greet2Lambda = (greeting) => (name) => `${greeting} ${name}`;
+
+console.log(friends.map(greet)); //[ 'Hi there Nate', 'Hi there Jim', 'Hi there Bob', 'Hi there Foo' ]
+// partial application
+console.log(friends.map(greet2('Yo my man'))); //[ 'Yo my man Nate', 'Yo my man Jim', 'Yo my man Bob', 'Yo my man Foo' ]
+console.log(friends.map(greet2Lambda('Yo my man'))); //[ 'Yo my man Nate', 'Yo my man Jim', 'Yo my man Bob', 'Yo my man Foo' ]
+console.log(greet2Lambda('hi there')('bob'));
+console.log('\n');
+
+// currying - creating functions
+// partial application - using functions with prepopulated data
+
+// partial application without currying - using helper high order function
+// keep in mind order of params!
+
+const add = (a,b) => a+b;
+const partial = (fun, param) => (otherParam) => fun(param, otherParam);
+const add3 = partial(add, 3);
+console.log(add3(2));
