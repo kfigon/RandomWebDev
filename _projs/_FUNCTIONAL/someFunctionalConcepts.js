@@ -109,6 +109,22 @@ const partial = (fun, param) => (otherParam) => fun(param, otherParam);
 const add3 = partial(add, 3);
 console.log(add3(2));
 
+console.log('\npartials');
+
+function partial2(fn,...presetArgs) {
+    return function partiallyApplied(...laterArgs){
+        return fn( ...presetArgs, ...laterArgs );
+    };
+}
+
+const sumVals= (a,b,c) => a+b+c;
+const f = partial2(sumVals, 1);
+const f2 = partial2(sumVals, 1, 2);
+const f3 = partial2(sumVals, 1, 2, 3);
+console.log(f(1, 2)); // 4
+console.log(f2(3));   // 6
+console.log(f3());    // 6
+console.log('\n');
 
 // pure functions - have input params, no state, no side effects, returns something only based on input
 // impure functions (procedures)
