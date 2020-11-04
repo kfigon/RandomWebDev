@@ -12,20 +12,28 @@ function tag(tagName, classNames, val) {
     nodeElement.innerText = val;
     return nodeElement;
 }
+// function liStyled(classNames: Array<string>): Function {
+//     return function(val: string): Node {
+//         return tag('li', classNames, val);
+//     }
+// }
+var liStyled = function (classNames) {
+    return function (val) { return tag('li', classNames, val); };
+};
 function ul() {
     return tag('ul', ['list'], '');
 }
 function li(val) {
-    return tag('li', ['item'], val);
+    return liStyled(['item'])(val);
 }
 function mapToList(el) {
-    return li(el.name + " -> " + el.calories);
+    return li(el.name + " ---- " + el.calories);
 }
 function summaryNode(meals) {
     var sum = meals
         .map(function (v) { return v.calories; })
         .reduce(function (a, b) { return a + b; }, 0);
-    return li("Summary: " + sum);
+    return liStyled(['summary'])("Summary: " + sum);
 }
 var items = MEALS.map(mapToList);
 items.push(summaryNode(MEALS));

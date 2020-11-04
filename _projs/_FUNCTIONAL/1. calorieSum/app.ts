@@ -16,23 +16,27 @@ function tag(tagName: string, classNames: Array<string>, val: string): Node {
     return nodeElement;
 }
 
+const liStyled = (classNames: Array<string>): Function => {
+    return (val:string): Node => tag('li', classNames, val);
+}
+
 function ul(): Node {
     return tag('ul', ['list'], '');
 }
 
 function li(val: string): Node {
-    return tag('li', ['item'], val);
+    return liStyled(['item'])(val);
 }
 
 function mapToList(el: Meal): Node {
-    return li(`${el.name} -> ${el.calories}`);
+    return li(`${el.name} ---- ${el.calories}`);
 }
 
 function summaryNode(meals: Array<Meal>): Node {
     const sum = meals
-                .map(v => v.calories)
-                .reduce((a,b) => a+b, 0);
-    return li(`Summary: ${sum}`);
+        .map(v => v.calories)
+        .reduce((a, b) => a + b, 0);
+    return liStyled(['summary'])(`Summary: ${sum}`);
 }
 
 const items = MEALS.map(mapToList);
