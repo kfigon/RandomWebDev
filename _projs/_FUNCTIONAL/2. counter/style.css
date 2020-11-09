@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    background-color: rgb(203, 211, 211);
+}
+
+button {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+button:focus{
+    outline: none;
+}
+#app{
+    display: flex;
+    justify-content: center;
+}
