@@ -16,7 +16,7 @@ function createView(meals, dispatch) {
     node.appendChild(createInputView('input-name'));
     node.appendChild(createInputView('input-calories'));
     node.appendChild(createButton(function () { return dispatch(Operation.Add); }, 'Add'));
-    node.appendChild(createMealsView(meals));
+    node.appendChild(createMealsView(meals, dispatch));
     return node;
 }
 function createInputView(id) {
@@ -24,13 +24,13 @@ function createInputView(id) {
     node.id = id;
     return node;
 }
-function createMealsView(meals) {
+function createMealsView(meals, callback) {
     var node = document.createElement('ul');
     meals
-        .map(function (m) { return m.name + " - " + m.calories; })
         .map(function (m) {
         var el = document.createElement('li');
-        el.innerText = m;
+        el.innerText = m.name + " - " + m.calories;
+        el.addEventListener('click', function () { return callback(Operation.Remove, m); });
         return el;
     })
         .forEach(function (m) { return node.appendChild(m); });
@@ -60,7 +60,7 @@ function addNewMeal(meals, newMeal) {
 function removeMeal(meals, mealToRemove) {
     if (!mealToRemove)
         return meals;
-    meals = meals.filter(function (m) { return m.calories === mealToRemove.calories && m.name === mealToRemove.name; });
+    meals = meals.filter(function (m) { return m.calories !== mealToRemove.calories || m.name !== mealToRemove.name; });
     return meals;
 }
 function runApp() {
@@ -72,13 +72,14 @@ function runApp() {
     var currentModel = [];
     var currentView = createView(currentModel, dispatch);
     app.appendChild(currentView);
-    function dispatch(operation) {
+    function dispatch(operation, clickedElement) {
         if (operation === Operation.Add) {
             var newMeal = readData();
             currentModel = addNewMeal(currentModel, newMeal);
         }
         else if (operation === Operation.Remove) {
-            var mealToRemove = null; // todo: handle!
+            console.log('clicked remove ' + clickedElement);
+            var mealToRemove = clickedElement;
             currentModel = removeMeal(currentModel, mealToRemove);
         }
         var updatedView = createView(currentModel, dispatch);

@@ -20,7 +20,7 @@ function createView(meals: Meal[], dispatch: Function): HTMLElement {
     node.appendChild(createInputView('input-name'));
     node.appendChild(createInputView('input-calories'));
     node.appendChild(createButton(() => dispatch(Operation.Add), 'Add'));
-    node.appendChild(createMealsView(meals));
+    node.appendChild(createMealsView(meals, dispatch));
 
     return node;
 }
@@ -31,13 +31,13 @@ function createInputView(id: string): HTMLElement {
     return node;
 }
 
-function createMealsView(meals: Meal[]): HTMLUListElement {
+function createMealsView(meals: Meal[], callback: Function): HTMLUListElement {
     const node = document.createElement('ul');
     meals
-        .map(m => `${m.name} - ${m.calories}`)
         .map(m => {
             const el = document.createElement('li');
-            el.innerText = m;
+            el.innerText = `${m.name} - ${m.calories}`;
+            el.addEventListener('click', () => callback(Operation.Remove, m));
             return el;
         })
         .forEach(m => node.appendChild(m));
@@ -72,7 +72,7 @@ function addNewMeal(meals: Meal[], newMeal: Meal | null): Meal[] {
 function removeMeal(meals: Meal[], mealToRemove: Meal | null): Meal[] {
     if(!mealToRemove) return meals;
 
-    meals = meals.filter(m => m.calories === mealToRemove.calories && m.name===mealToRemove.name);
+    meals = meals.filter(m => m.calories !== mealToRemove.calories || m.name!==mealToRemove.name);
     return meals;
 }
 
@@ -89,12 +89,12 @@ function runApp() {
     app.appendChild(currentView);
 
 
-    function dispatch(operation: Operation) {
+    function dispatch(operation: Operation, clickedElement: Meal | null) {
         if (operation === Operation.Add) {
             const newMeal = readData();
             currentModel = addNewMeal(currentModel, newMeal);
         } else if(operation === Operation.Remove) {
-            const mealToRemove = null; // todo: handle!
+            const mealToRemove = clickedElement;
             currentModel = removeMeal(currentModel, mealToRemove);
         }
         
