@@ -5,16 +5,19 @@ var Mode;
     Mode[Mode["ADD"] = 1] = "ADD";
     Mode[Mode["EDIT"] = 2] = "EDIT";
 })(Mode || (Mode = {}));
+var Action;
+(function (Action) {
+    Action[Action["SHOW_EDIT_FORM"] = 0] = "SHOW_EDIT_FORM";
+    Action[Action["SHOW_ADD_FORM"] = 1] = "SHOW_ADD_FORM";
+    Action[Action["HIDE_FORM"] = 2] = "HIDE_FORM";
+    Action[Action["SAVE_NEW"] = 3] = "SAVE_NEW";
+    Action[Action["SAVE_EDIT"] = 4] = "SAVE_EDIT";
+    Action[Action["STORE_DESCRIPTION"] = 5] = "STORE_DESCRIPTION";
+    Action[Action["STORE_CALORIES"] = 6] = "STORE_CALORIES";
+    Action[Action["REMOVE"] = 7] = "REMOVE";
+})(Action || (Action = {}));
 function calculateTotal(meals) {
     return meals.map(function (m) { return m.calories; }).reduce(function (acc, m) { return acc + m; }, 0);
-}
-function updateDescription(state, newInput) {
-    state.pendingNewDescription = newInput;
-    return state;
-}
-function updateCalories(state, newCalories) {
-    state.pendingNewCalories = newCalories;
-    return state;
 }
 function handleNewMeal(state) {
     state.mode = Mode.ADD;
@@ -54,38 +57,77 @@ function handleSaveEdit(state) {
     }
     return state;
 }
-function handleRemove(state, idToRemove) {
+function handleShowAddForm(state) {
+    state.mode = Mode.ADD;
+    state.editId = null;
+    state.pendingNewCalories = null;
+    state.pendingNewDescription = null;
+    return state;
+}
+function handleShowEditForm(state) {
+    state.mode = Mode.EDIT;
+    state.editId = null;
+    state.pendingNewCalories = null;
+    state.pendingNewDescription = null;
+    return state;
+}
+function handleRemove(state) {
+    var idToRemove = state.editId;
     state.meals = state.meals.filter(function (v, idx) { return idx !== idToRemove; });
+    state.editId = null;
+    return state;
+}
+function update(action, state) {
+    switch (action) {
+        case Action.SHOW_ADD_FORM: return handleShowAddForm(state);
+        case Action.SHOW_EDIT_FORM: return handleShowEditForm(state);
+        case Action.HIDE_FORM: return handleCancel(state);
+        case Action.REMOVE: handleRemove(state);
+        case Action.SAVE_EDIT: handleSaveEdit(state);
+        case Action.SAVE_NEW: handleSaveNew(state);
+    }
     return state;
 }
 // ----------------------------- VIEW
-function view(state) {
+function view(dispatchFunction, state) {
     var div = document.createElement('div');
     div.appendChild(h1('Calorie counting app'));
     if (state.mode === Mode.VIEW) {
-        div.appendChild(button(function () { return console.log('todo'); }, 'Add meal'));
+        div.appendChild(button(function () { return dispatchFunction(Action.SHOW_ADD_FORM); }, 'Add meal'));
     }
     else if (state.mode === Mode.ADD) {
-        div.appendChild(input('Meal name: ', 'string'));
-        div.appendChild(input('Calories: ', 'number'));
-        div.appendChild(button(function () { return console.log("todo"); }, 'Add Meal'));
-        div.appendChild(button(function () { return console.log("todo"); }, 'Cancel'));
+        // todo: is this a good way to save state?
+        div.appendChild(input('Meal name: ', 'string', function (ev) {
+            state.pendingNewDescription = ev.key;
+            console.log(state.pendingNewDescription);
+        }));
+        div.appendChild(input('Calories: ', 'number', function (ev) {
+            state.pendingNewCalories = parseInt(ev.key);
+        }));
+        div.appendChild(button(function () { return dispatchFunction(Action.SAVE_NEW); }, 'Save'));
+        div.appendChild(button(function () { return dispatchFunction(Action.HIDE_FORM); }, 'Cancel'));
     }
     else if (state.mode === Mode.EDIT) {
-        div.appendChild(input('Meal name: ', 'string'));
-        div.appendChild(input('Calories: ', 'number'));
-        div.appendChild(button(function () { return console.log("todo"); }, 'Edit Meal'));
-        div.appendChild(button(function () { return console.log("todo"); }, 'Cancel'));
+        div.appendChild(input('Meal name: ', 'string', function (ev) {
+            state.pendingNewDescription = ev.key;
+            console.log(state.pendingNewDescription);
+        }));
+        div.appendChild(input('Calories: ', 'number', function (ev) {
+            state.pendingNewCalories = parseInt(ev.key);
+        }));
+        div.appendChild(button(function () { return dispatchFunction(Action.SAVE_EDIT); }, 'Save'));
+        div.appendChild(button(function () { return dispatchFunction(Action.HIDE_FORM); }, 'Cancel'));
     }
-    div.appendChild(table(state.meals));
+    div.appendChild(table(dispatchFunction, state));
     return div;
 }
-function input(labelText, inputType) {
+function input(labelText, inputType, typedCallback) {
     var div = document.createElement('div');
     var label = document.createElement('label');
     label.innerText = labelText;
     var inField = document.createElement('input');
     inField.inputMode = inputType;
+    inField.addEventListener('keypress', typedCallback);
     div.appendChild(label);
     div.appendChild(inField);
     return div;
@@ -101,11 +143,11 @@ function h1(desc) {
     h.innerText = desc;
     return h;
 }
-function table(meals) {
+function table(dispatchFunction, state) {
     var tab = document.createElement('table');
     tab.appendChild(createTableHead(['Meal', 'Calories', 'Actions']));
-    tab.appendChild(createTableBody(meals));
-    tab.appendChild(createTableFooter(calculateTotal(meals)));
+    tab.appendChild(createTableBody(dispatchFunction, state));
+    tab.appendChild(createTableFooter(calculateTotal(state.meals)));
     return tab;
 }
 function createTableHead(colums) {
@@ -131,14 +173,28 @@ function th(text) {
     th.innerText = text;
     return th;
 }
-function createTableBody(meals) {
+function createTableBody(dispatchFunction, state) {
     var body = document.createElement('tbody');
-    meals
-        .map(function (el) {
+    var thButtons = function (but1, but2) {
+        var th = document.createElement('th');
+        th.appendChild(but1);
+        th.appendChild(but2);
+        return th;
+    };
+    var bt1 = function (id) { return function () {
+        state.editId = id;
+        return button(function () { return dispatchFunction(Action.SHOW_EDIT_FORM); }, 'Edit');
+    }; };
+    var bt2 = function (id) { return function () {
+        state.editId = id;
+        return button(function () { return dispatchFunction(Action.REMOVE); }, 'Remove');
+    }; };
+    state.meals
+        .map(function (el, idx) {
         var row = document.createElement('tr');
         row.appendChild(th(el.name));
         row.appendChild(th(el.calories.toString()));
-        row.appendChild(th('buttons todo'));
+        row.appendChild(thButtons(bt1(idx)(), bt2(idx)()));
         return row;
     })
         .forEach(function (row) { return body.appendChild(row); });
@@ -158,14 +214,22 @@ function app() {
     ];
     var initState = {
         meals: meals,
-        mode: Mode.ADD,
+        mode: Mode.VIEW,
         editId: null,
         pendingNewCalories: null,
         pendingNewDescription: null,
         nextNewId: meals.length
     };
-    ap.appendChild(view(initState));
-    console.log(JSON.stringify(initState.meals));
-    console.log(JSON.stringify(handleRemove(initState, 1).meals));
+    var currentModel = initState;
+    var currentView = view(updateView, initState);
+    ap.appendChild(currentView);
+    function updateView(action) {
+        currentModel = update(action, currentModel);
+        var updatedView = view(updateView, currentModel);
+        if (!ap)
+            return;
+        ap.replaceChild(updatedView, currentView);
+        currentView = updatedView;
+    }
 }
 app();
