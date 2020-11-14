@@ -11,22 +11,55 @@ enum Mode {
 interface State {
     meals: Meal[];
 
-    description: string;
-    calories: number;
+    pendingNewDescription: string | null;
+    pendingNewCalories: number | null;
 
     mode: Mode;
-    editId: number;
+    editId: number | null;
 }
 
 function calculateTotal(meals: Meal[]): number {
     return meals.map(m => m.calories).reduce((acc, m) => acc + m, 0);
 }
 
-// function view(state: State): HTMLElement {
-//     if (state.mode === Mode.VIEW) {
+function view(state: State): HTMLElement {
+    const div = document.createElement('div');
+    div.appendChild(h1('Calorie counting app'));
+    
+    if (state.mode === Mode.VIEW) {
+        div.appendChild(button(() => state = handleAddMealButton(state), 'Add meal'));
+    } else if(state.mode === Mode.ADD) {
+        div.appendChild(input('Meal name: ', 'string'));
+        div.appendChild(input('Calories: ', 'number'));
+        div.appendChild(button(() => console.log("todo"), 'Add Meal'));
 
-//     }
-// }
+    } else if(state.mode === Mode.EDIT) {
+        div.appendChild(input('Meal name: ', 'string'));
+        div.appendChild(input('Calories: ', 'number'));
+        div.appendChild(button(() => console.log("todo"), 'Edit Meal'));
+    }
+
+    div.appendChild(table(state.meals));
+    return div;
+}
+
+function handleAddMealButton(state: State): State {
+    state.mode = Mode.ADD;
+    return state;
+}
+
+function input(labelText: string, inputType: string) : HTMLElement {
+    const div = document.createElement('div');
+    const label = document.createElement('label');
+    label.innerText = labelText;
+
+    const inField = document.createElement('input');
+    inField.inputMode = inputType;
+
+    div.appendChild(label);
+    div.appendChild(inField);
+    return div;
+}   
 
 function button(callback: any, desc: string): HTMLButtonElement {
     const but = document.createElement('button');
@@ -105,7 +138,16 @@ function app() {
         { id: 0, name: 'Breakfast', calories: 300 },
         { id: 1, name: 'Dinner', calories: 600 },
         { id: 2, name: 'Supper', calories: 400 }];
-    ap.appendChild(table(meals));
+    
+    const state: State = {
+        meals: meals,
+        mode: Mode.ADD,
+        editId: null,
+        pendingNewCalories: null,
+        pendingNewDescription: null
+    }
+
+    ap.appendChild(view(state));
 }
 
 app();

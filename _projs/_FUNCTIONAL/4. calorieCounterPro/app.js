@@ -8,10 +8,39 @@ var Mode;
 function calculateTotal(meals) {
     return meals.map(function (m) { return m.calories; }).reduce(function (acc, m) { return acc + m; }, 0);
 }
-// function view(state: State): HTMLElement {
-//     if (state.mode === Mode.VIEW) {
-//     }
-// }
+function view(state) {
+    var div = document.createElement('div');
+    div.appendChild(h1('Calorie counting app'));
+    if (state.mode === Mode.VIEW) {
+        div.appendChild(button(function () { return state = handleAddMealButton(state); }, 'Add meal'));
+    }
+    else if (state.mode === Mode.ADD) {
+        div.appendChild(input('Meal name: ', 'string'));
+        div.appendChild(input('Calories: ', 'number'));
+        div.appendChild(button(function () { return console.log("todo"); }, 'Add Meal'));
+    }
+    else if (state.mode === Mode.EDIT) {
+        div.appendChild(input('Meal name: ', 'string'));
+        div.appendChild(input('Calories: ', 'number'));
+        div.appendChild(button(function () { return console.log("todo"); }, 'Edit Meal'));
+    }
+    div.appendChild(table(state.meals));
+    return div;
+}
+function handleAddMealButton(state) {
+    state.mode = Mode.ADD;
+    return state;
+}
+function input(labelText, inputType) {
+    var div = document.createElement('div');
+    var label = document.createElement('label');
+    label.innerText = labelText;
+    var inField = document.createElement('input');
+    inField.inputMode = inputType;
+    div.appendChild(label);
+    div.appendChild(inField);
+    return div;
+}
 function button(callback, desc) {
     var but = document.createElement('button');
     but.addEventListener('click', callback);
@@ -77,6 +106,13 @@ function app() {
         { id: 1, name: 'Dinner', calories: 600 },
         { id: 2, name: 'Supper', calories: 400 }
     ];
-    ap.appendChild(table(meals));
+    var state = {
+        meals: meals,
+        mode: Mode.ADD,
+        editId: null,
+        pendingNewCalories: null,
+        pendingNewDescription: null
+    };
+    ap.appendChild(view(state));
 }
 app();
