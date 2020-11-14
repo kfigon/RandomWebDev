@@ -12,24 +12,22 @@ function view(state) {
     var div = document.createElement('div');
     div.appendChild(h1('Calorie counting app'));
     if (state.mode === Mode.VIEW) {
-        div.appendChild(button(function () { return state = handleAddMealButton(state); }, 'Add meal'));
+        div.appendChild(button(function () { return console.log('todo'); }, 'Add meal'));
     }
     else if (state.mode === Mode.ADD) {
         div.appendChild(input('Meal name: ', 'string'));
         div.appendChild(input('Calories: ', 'number'));
         div.appendChild(button(function () { return console.log("todo"); }, 'Add Meal'));
+        div.appendChild(button(function () { return console.log("todo"); }, 'Cancel'));
     }
     else if (state.mode === Mode.EDIT) {
         div.appendChild(input('Meal name: ', 'string'));
         div.appendChild(input('Calories: ', 'number'));
         div.appendChild(button(function () { return console.log("todo"); }, 'Edit Meal'));
+        div.appendChild(button(function () { return console.log("todo"); }, 'Cancel'));
     }
     div.appendChild(table(state.meals));
     return div;
-}
-function handleAddMealButton(state) {
-    state.mode = Mode.ADD;
-    return state;
 }
 function input(labelText, inputType) {
     var div = document.createElement('div');

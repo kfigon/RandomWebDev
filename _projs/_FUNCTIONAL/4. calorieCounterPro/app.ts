@@ -27,25 +27,22 @@ function view(state: State): HTMLElement {
     div.appendChild(h1('Calorie counting app'));
     
     if (state.mode === Mode.VIEW) {
-        div.appendChild(button(() => state = handleAddMealButton(state), 'Add meal'));
+        div.appendChild(button(() => console.log('todo'), 'Add meal'));
     } else if(state.mode === Mode.ADD) {
         div.appendChild(input('Meal name: ', 'string'));
         div.appendChild(input('Calories: ', 'number'));
         div.appendChild(button(() => console.log("todo"), 'Add Meal'));
+        div.appendChild(button(() => console.log("todo"), 'Cancel'));
 
     } else if(state.mode === Mode.EDIT) {
         div.appendChild(input('Meal name: ', 'string'));
         div.appendChild(input('Calories: ', 'number'));
         div.appendChild(button(() => console.log("todo"), 'Edit Meal'));
+        div.appendChild(button(() => console.log("todo"), 'Cancel'));
     }
 
     div.appendChild(table(state.meals));
     return div;
-}
-
-function handleAddMealButton(state: State): State {
-    state.mode = Mode.ADD;
-    return state;
 }
 
 function input(labelText: string, inputType: string) : HTMLElement {
