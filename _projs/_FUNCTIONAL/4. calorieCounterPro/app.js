@@ -97,23 +97,35 @@ function view(dispatchFunction, state) {
     }
     else if (state.mode === Mode.ADD) {
         // todo: is this a good way to save state?
+        // make it proper update state function
+        // key by key, fix it:(
         div.appendChild(input('Meal name: ', 'string', function (ev) {
-            state.pendingNewDescription = ev.key;
-            console.log(state.pendingNewDescription);
+            if (state.pendingNewDescription === null)
+                state.pendingNewDescription = '';
+            state.pendingNewDescription += ev.key;
         }));
         div.appendChild(input('Calories: ', 'number', function (ev) {
-            state.pendingNewCalories = parseInt(ev.key);
+            if (state.pendingNewCalories === null)
+                state.pendingNewCalories = 0;
+            var curString = state.pendingNewCalories.toString();
+            curString += ev.key;
+            state.pendingNewCalories = parseInt(curString);
         }));
         div.appendChild(button(function () { return dispatchFunction(Action.SAVE_NEW); }, 'Save'));
         div.appendChild(button(function () { return dispatchFunction(Action.HIDE_FORM); }, 'Cancel'));
     }
     else if (state.mode === Mode.EDIT) {
         div.appendChild(input('Meal name: ', 'string', function (ev) {
-            state.pendingNewDescription = ev.key;
-            console.log(state.pendingNewDescription);
+            if (state.pendingNewDescription === null)
+                state.pendingNewDescription = '';
+            state.pendingNewDescription += ev.key;
         }));
         div.appendChild(input('Calories: ', 'number', function (ev) {
-            state.pendingNewCalories = parseInt(ev.key);
+            if (state.pendingNewCalories === null)
+                state.pendingNewCalories = 0;
+            var curString = state.pendingNewCalories.toString();
+            curString += ev.key;
+            state.pendingNewCalories = parseInt(curString);
         }));
         div.appendChild(button(function () { return dispatchFunction(Action.SAVE_EDIT); }, 'Save'));
         div.appendChild(button(function () { return dispatchFunction(Action.HIDE_FORM); }, 'Cancel'));

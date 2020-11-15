@@ -132,24 +132,29 @@ function view(dispatchFunction: Function, state: State): HTMLElement {
         // make it proper update state function
         // key by key, fix it:(
         div.appendChild(input('Meal name: ', 'string', (ev: KeyboardEvent) =>{
-            state.pendingNewDescription = ev.key;
-            console.log(state.pendingNewDescription);
-
+            if(state.pendingNewDescription === null) state.pendingNewDescription = '';
+            state.pendingNewDescription += ev.key;
         }));
         div.appendChild(input('Calories: ', 'number',(ev: KeyboardEvent) =>{
-                state.pendingNewCalories = parseInt(ev.key);
+                if(state.pendingNewCalories === null) state.pendingNewCalories = 0;
+                let curString = state.pendingNewCalories.toString();
+                curString += ev.key;
+                state.pendingNewCalories = parseInt(curString);
         }));
         div.appendChild(button(() => dispatchFunction(Action.SAVE_NEW), 'Save'));
         div.appendChild(button(() => dispatchFunction(Action.HIDE_FORM), 'Cancel'));
 
     } else if (state.mode === Mode.EDIT) {
         div.appendChild(input('Meal name: ', 'string', (ev: KeyboardEvent) =>{
-            state.pendingNewDescription = ev.key;
-            console.log(state.pendingNewDescription);
+            if(state.pendingNewDescription === null) state.pendingNewDescription = '';
+            state.pendingNewDescription += ev.key;
             
         }));
         div.appendChild(input('Calories: ', 'number',(ev: KeyboardEvent) =>{
-                state.pendingNewCalories = parseInt(ev.key);
+            if(state.pendingNewCalories === null) state.pendingNewCalories = 0;
+            let curString = state.pendingNewCalories.toString();
+            curString += ev.key;
+            state.pendingNewCalories = parseInt(curString);
         }));
         div.appendChild(button(() => dispatchFunction(Action.SAVE_EDIT), 'Save'));
         div.appendChild(button(() => dispatchFunction(Action.HIDE_FORM), 'Cancel'));
