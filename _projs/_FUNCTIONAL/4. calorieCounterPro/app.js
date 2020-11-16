@@ -12,8 +12,8 @@ var Action;
     Action[Action["HIDE_FORM"] = 2] = "HIDE_FORM";
     Action[Action["SAVE_NEW"] = 3] = "SAVE_NEW";
     Action[Action["SAVE_EDIT"] = 4] = "SAVE_EDIT";
-    Action[Action["STORE_DESCRIPTION"] = 5] = "STORE_DESCRIPTION";
-    Action[Action["STORE_CALORIES"] = 6] = "STORE_CALORIES";
+    Action[Action["STORE_TEXT_DESCRIPTION"] = 5] = "STORE_TEXT_DESCRIPTION";
+    Action[Action["STORE_NUMBER"] = 6] = "STORE_NUMBER";
     Action[Action["REMOVE"] = 7] = "REMOVE";
 })(Action || (Action = {}));
 function calculateTotal(meals) {
@@ -21,6 +21,9 @@ function calculateTotal(meals) {
 }
 function handleNewMeal(state) {
     state.mode = Mode.ADD;
+    state.editId = null;
+    state.pendingNewCalories = null;
+    state.pendingNewDescription = null;
     return state;
 }
 function handleCancel(state) {
@@ -66,15 +69,41 @@ function handleShowAddForm(state) {
 }
 function handleShowEditForm(state) {
     state.mode = Mode.EDIT;
+    return state;
+}
+function handleRemove(state) {
+    var idToRemove = state.editId;
+    state.meals = state.meals.filter(function (v) { return v.id !== idToRemove; });
     state.editId = null;
     state.pendingNewCalories = null;
     state.pendingNewDescription = null;
     return state;
 }
-function handleRemove(state) {
-    var idToRemove = state.editId;
-    state.meals = state.meals.filter(function (v, idx) { return idx !== idToRemove; });
-    state.editId = null;
+function handleAddText(state, text) {
+    if (text === null)
+        return state;
+    state.pendingNewDescription = text;
+    return state;
+}
+function handleAddNumber(state, text) {
+    if (text === null)
+        return state;
+    var res = parseInt(text);
+    var num = res === NaN ? 0 : res;
+    state.pendingNewCalories = num;
+    return state;
+}
+function handleFillDataForEdit(state, id) {
+    state.editId = id;
+    var meal = state.meals.filter(function (m) { return m.id === id; });
+    if (meal.length === 0)
+        return state;
+    state.pendingNewCalories = meal[0].calories;
+    state.pendingNewDescription = meal[0].name;
+    return state;
+}
+function handleFillDataForRemove(state, id) {
+    state.editId = id;
     return state;
 }
 function update(action, state) {
@@ -82,9 +111,11 @@ function update(action, state) {
         case Action.SHOW_ADD_FORM: return handleShowAddForm(state);
         case Action.SHOW_EDIT_FORM: return handleShowEditForm(state);
         case Action.HIDE_FORM: return handleCancel(state);
-        case Action.REMOVE: handleRemove(state);
-        case Action.SAVE_EDIT: handleSaveEdit(state);
-        case Action.SAVE_NEW: handleSaveNew(state);
+        case Action.REMOVE: return handleRemove(state);
+        case Action.SAVE_EDIT: return handleSaveEdit(state);
+        case Action.SAVE_NEW: return handleSaveNew(state);
+        case Action.STORE_NUMBER:
+        case Action.STORE_TEXT_DESCRIPTION: break; //do nothing
     }
     return state;
 }
@@ -92,54 +123,40 @@ function update(action, state) {
 function view(dispatchFunction, state) {
     var div = document.createElement('div');
     div.appendChild(h1('Calorie counting app'));
+    var nullSafe = function (ev) { return (ev.target) ? ev.target.value : null; };
     if (state.mode === Mode.VIEW) {
         div.appendChild(button(function () { return dispatchFunction(Action.SHOW_ADD_FORM); }, 'Add meal'));
     }
-    else if (state.mode === Mode.ADD) {
-        // todo: is this a good way to save state?
-        // make it proper update state function
-        // key by key, fix it:(
-        div.appendChild(input('Meal name: ', 'string', function (ev) {
-            if (state.pendingNewDescription === null)
-                state.pendingNewDescription = '';
-            state.pendingNewDescription += ev.key;
+    else {
+        div.appendChild(input('Meal name: ', 'string', state.pendingNewDescription, function (ev) {
+            state = handleAddText(state, nullSafe(ev));
+            // dispatchFunction(Action.STORE_TEXT_DESCRIPTION);
         }));
-        div.appendChild(input('Calories: ', 'number', function (ev) {
-            if (state.pendingNewCalories === null)
-                state.pendingNewCalories = 0;
-            var curString = state.pendingNewCalories.toString();
-            curString += ev.key;
-            state.pendingNewCalories = parseInt(curString);
+        var getCalorie = function () { return state.pendingNewCalories === null ? '' : state.pendingNewCalories.toString(); };
+        div.appendChild(input('Calories: ', 'number', getCalorie(), function (ev) {
+            state = handleAddNumber(state, nullSafe(ev));
+            // dispatchFunction(Action.STORE_NUMBER);
         }));
-        div.appendChild(button(function () { return dispatchFunction(Action.SAVE_NEW); }, 'Save'));
-        div.appendChild(button(function () { return dispatchFunction(Action.HIDE_FORM); }, 'Cancel'));
-    }
-    else if (state.mode === Mode.EDIT) {
-        div.appendChild(input('Meal name: ', 'string', function (ev) {
-            if (state.pendingNewDescription === null)
-                state.pendingNewDescription = '';
-            state.pendingNewDescription += ev.key;
-        }));
-        div.appendChild(input('Calories: ', 'number', function (ev) {
-            if (state.pendingNewCalories === null)
-                state.pendingNewCalories = 0;
-            var curString = state.pendingNewCalories.toString();
-            curString += ev.key;
-            state.pendingNewCalories = parseInt(curString);
-        }));
-        div.appendChild(button(function () { return dispatchFunction(Action.SAVE_EDIT); }, 'Save'));
+        if (state.mode === Mode.ADD) {
+            div.appendChild(button(function () { return dispatchFunction(Action.SAVE_NEW); }, 'Save'));
+        }
+        else if (state.mode === Mode.EDIT) {
+            div.appendChild(button(function () { return dispatchFunction(Action.SAVE_EDIT); }, 'Save'));
+        }
         div.appendChild(button(function () { return dispatchFunction(Action.HIDE_FORM); }, 'Cancel'));
     }
     div.appendChild(table(dispatchFunction, state));
     return div;
 }
-function input(labelText, inputType, typedCallback) {
+function input(labelText, inputType, value, typedCallback) {
     var div = document.createElement('div');
     var label = document.createElement('label');
     label.innerText = labelText;
     var inField = document.createElement('input');
     inField.inputMode = inputType;
-    inField.addEventListener('keypress', typedCallback);
+    if (value !== null)
+        inField.defaultValue = value;
+    inField.addEventListener('input', typedCallback);
     div.appendChild(label);
     div.appendChild(inField);
     return div;
@@ -194,19 +211,23 @@ function createTableBody(dispatchFunction, state) {
         return th;
     };
     var bt1 = function (id) { return function () {
-        state.editId = id;
-        return button(function () { return dispatchFunction(Action.SHOW_EDIT_FORM); }, 'Edit');
+        return button(function () {
+            state = handleFillDataForEdit(state, id);
+            dispatchFunction(Action.SHOW_EDIT_FORM);
+        }, 'Edit');
     }; };
     var bt2 = function (id) { return function () {
-        state.editId = id;
-        return button(function () { return dispatchFunction(Action.REMOVE); }, 'Remove');
+        return button(function () {
+            state = handleFillDataForRemove(state, id);
+            dispatchFunction(Action.REMOVE);
+        }, 'Remove');
     }; };
     state.meals
-        .map(function (el, idx) {
+        .map(function (el) {
         var row = document.createElement('tr');
         row.appendChild(th(el.name));
         row.appendChild(th(el.calories.toString()));
-        row.appendChild(thButtons(bt1(idx)(), bt2(idx)()));
+        row.appendChild(thButtons(bt1(el.id)(), bt2(el.id)()));
         return row;
     })
         .forEach(function (row) { return body.appendChild(row); });
@@ -236,7 +257,11 @@ function app() {
     var currentView = view(updateView, initState);
     ap.appendChild(currentView);
     function updateView(action) {
+        console.log("PRE");
+        console.log(JSON.stringify(currentModel));
         currentModel = update(action, currentModel);
+        console.log("POST");
+        console.log(JSON.stringify(currentModel));
         var updatedView = view(updateView, currentModel);
         if (!ap)
             return;

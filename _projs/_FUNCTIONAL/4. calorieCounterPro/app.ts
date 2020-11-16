@@ -15,8 +15,8 @@ enum Action {
     HIDE_FORM,
     SAVE_NEW,
     SAVE_EDIT,
-    STORE_DESCRIPTION,
-    STORE_CALORIES,
+    STORE_TEXT_DESCRIPTION,
+    STORE_NUMBER,
     REMOVE
 }
 
@@ -37,6 +37,9 @@ function calculateTotal(meals: Meal[]): number {
 
 function handleNewMeal(state: State): State {
     state.mode = Mode.ADD;
+    state.editId = null;
+    state.pendingNewCalories = null;
+    state.pendingNewDescription = null;
     return state;
 }
 
@@ -49,7 +52,7 @@ function handleCancel(state: State): State {
 }
 
 function handleSaveNew(state: State): State {
-    if (state.pendingNewCalories !== null && state.pendingNewDescription !== null) {
+    if (state.pendingNewCalories !== null && state.pendingNewDescription !== null) {        
         const newMeal: Meal = { id: state.nextNewId, name: state.pendingNewDescription, calories: state.pendingNewCalories };
         state.meals.push(newMeal);
         state.nextNewId++;
@@ -92,17 +95,47 @@ function handleShowAddForm(state: State): State {
 
 function handleShowEditForm(state: State): State {
     state.mode = Mode.EDIT;
+    return state;
+}
+
+function handleRemove(state: State): State {
+    const idToRemove = state.editId;
+    state.meals = state.meals.filter(v => v.id !== idToRemove);
+
     state.editId = null;
     state.pendingNewCalories = null;
     state.pendingNewDescription = null;
     return state;
 }
 
-function handleRemove(state: State): State {
-    const idToRemove = state.editId;
-    state.meals = state.meals.filter((v, idx) => idx !== idToRemove);
+function handleAddText(state: State, text: string | null): State {
+    if(text === null) return state;
+    state.pendingNewDescription = text;
+    return state;
+}
 
-    state.editId = null;
+function handleAddNumber(state: State, text: string | null): State {
+    if(text === null) return state;
+
+    const res = parseInt(text);
+    const num = res === NaN ? 0 : res
+
+    state.pendingNewCalories = num;
+    return state;
+}
+function handleFillDataForEdit(state: State, id: number): State {
+    state.editId = id;
+    const meal = state.meals.filter(m => m.id === id);
+    if (meal.length === 0) return state;
+
+    state.pendingNewCalories = meal[0].calories;
+    state.pendingNewDescription = meal[0].name;
+
+    return state;
+}
+
+function handleFillDataForRemove(state: State, id: number): State {
+    state.editId = id;    
     return state;
 }
 
@@ -111,9 +144,11 @@ function update(action: Action, state: State): State {
         case Action.SHOW_ADD_FORM: return handleShowAddForm(state);
         case Action.SHOW_EDIT_FORM: return handleShowEditForm(state);
         case Action.HIDE_FORM: return handleCancel(state);
-        case Action.REMOVE: handleRemove(state);
-        case Action.SAVE_EDIT: handleSaveEdit(state);
-        case Action.SAVE_NEW: handleSaveNew(state);
+        case Action.REMOVE: return handleRemove(state);
+        case Action.SAVE_EDIT: return handleSaveEdit(state);
+        case Action.SAVE_NEW: return handleSaveNew(state);
+        case Action.STORE_NUMBER:
+        case Action.STORE_TEXT_DESCRIPTION: break; //do nothing
     }
     return state;
 }
@@ -124,39 +159,29 @@ function view(dispatchFunction: Function, state: State): HTMLElement {
     const div = document.createElement('div');
     div.appendChild(h1('Calorie counting app'));
 
+    const nullSafe = (ev: any) => (ev.target) ? ev.target.value : null;
+
     if (state.mode === Mode.VIEW) {
         div.appendChild(button(() => dispatchFunction(Action.SHOW_ADD_FORM), 'Add meal'));
-    } else if (state.mode === Mode.ADD) {
-        
-        // todo: is this a good way to save state?
-        // make it proper update state function
-        // key by key, fix it:(
-        div.appendChild(input('Meal name: ', 'string', (ev: KeyboardEvent) =>{
-            if(state.pendingNewDescription === null) state.pendingNewDescription = '';
-            state.pendingNewDescription += ev.key;
-        }));
-        div.appendChild(input('Calories: ', 'number',(ev: KeyboardEvent) =>{
-                if(state.pendingNewCalories === null) state.pendingNewCalories = 0;
-                let curString = state.pendingNewCalories.toString();
-                curString += ev.key;
-                state.pendingNewCalories = parseInt(curString);
-        }));
-        div.appendChild(button(() => dispatchFunction(Action.SAVE_NEW), 'Save'));
-        div.appendChild(button(() => dispatchFunction(Action.HIDE_FORM), 'Cancel'));
+    } else {
 
-    } else if (state.mode === Mode.EDIT) {
-        div.appendChild(input('Meal name: ', 'string', (ev: KeyboardEvent) =>{
-            if(state.pendingNewDescription === null) state.pendingNewDescription = '';
-            state.pendingNewDescription += ev.key;
-            
+        div.appendChild(input('Meal name: ', 'string', state.pendingNewDescription, (ev: Event) => {
+            state = handleAddText(state, nullSafe(ev));
+            // dispatchFunction(Action.STORE_TEXT_DESCRIPTION);
         }));
-        div.appendChild(input('Calories: ', 'number',(ev: KeyboardEvent) =>{
-            if(state.pendingNewCalories === null) state.pendingNewCalories = 0;
-            let curString = state.pendingNewCalories.toString();
-            curString += ev.key;
-            state.pendingNewCalories = parseInt(curString);
+        const getCalorie = () => state.pendingNewCalories === null ? '' : state.pendingNewCalories.toString();
+
+        div.appendChild(input('Calories: ', 'number', getCalorie(), (ev: Event) => {
+            state = handleAddNumber(state, nullSafe(ev));
+            // dispatchFunction(Action.STORE_NUMBER);
         }));
-        div.appendChild(button(() => dispatchFunction(Action.SAVE_EDIT), 'Save'));
+
+        if (state.mode === Mode.ADD) {
+            div.appendChild(button(() => dispatchFunction(Action.SAVE_NEW), 'Save'));
+        } else if (state.mode === Mode.EDIT) {
+            div.appendChild(button(() => dispatchFunction(Action.SAVE_EDIT), 'Save'));
+        }
+
         div.appendChild(button(() => dispatchFunction(Action.HIDE_FORM), 'Cancel'));
     }
 
@@ -164,7 +189,7 @@ function view(dispatchFunction: Function, state: State): HTMLElement {
     return div;
 }
 
-function input(labelText: string, inputType: string, typedCallback: any): HTMLElement {
+function input(labelText: string, inputType: string, value: string | null, typedCallback: any): HTMLElement {
     const div = document.createElement('div');
     const label = document.createElement('label');
     label.innerText = labelText;
@@ -172,7 +197,9 @@ function input(labelText: string, inputType: string, typedCallback: any): HTMLEl
     const inField = document.createElement('input');
     inField.inputMode = inputType;
 
-    inField.addEventListener('keypress', typedCallback);
+    if(value !== null) inField.defaultValue = value;
+
+    inField.addEventListener('input', typedCallback);
 
     div.appendChild(label);
     div.appendChild(inField);
@@ -192,7 +219,7 @@ function h1(desc: string): HTMLElement {
     return h;
 }
 
-function table(dispatchFunction:Function, state: State): HTMLTableElement {
+function table(dispatchFunction: Function, state: State): HTMLTableElement {
     const tab = document.createElement('table');
     tab.appendChild(createTableHead(['Meal', 'Calories', 'Actions']))
     tab.appendChild(createTableBody(dispatchFunction, state))
@@ -240,22 +267,26 @@ function createTableBody(dispatchFunction: Function, state: State): HTMLElement 
         return th;
     }
 
-    const bt1 = (id: number) => () =>  {
-        state.editId = id;
-        return button(() => dispatchFunction(Action.SHOW_EDIT_FORM), 'Edit');
+    const bt1 = (id: number) => () => {
+        return button(() =>{
+            state = handleFillDataForEdit(state, id);
+            dispatchFunction(Action.SHOW_EDIT_FORM);
+        }, 'Edit');
     }
 
     const bt2 = (id: number) => () => {
-        state.editId = id;
-        return button(() => dispatchFunction(Action.REMOVE), 'Remove');
+        return button(() =>{
+            state = handleFillDataForRemove(state, id);
+            dispatchFunction(Action.REMOVE);
+        }, 'Remove');
     }
 
     state.meals
-        .map((el, idx) => {
+        .map((el) => {
             const row = document.createElement('tr');
             row.appendChild(th(el.name));
             row.appendChild(th(el.calories.toString()));
-            row.appendChild(thButtons(bt1(idx)(), bt2(idx)()));
+            row.appendChild(thButtons(bt1(el.id)(), bt2(el.id)()));
             return row;
         })
         .forEach(row => body.appendChild(row));
@@ -289,12 +320,19 @@ function app() {
     let currentView = view(updateView, initState)
     ap.appendChild(currentView);
 
-    
+
     function updateView(action: Action) {
-        currentModel = update(action, currentModel);
-        let updatedView = view(updateView, currentModel);
+        console.log("PRE");
+        console.log(JSON.stringify(currentModel));
         
-        if(!ap) return;
+        currentModel = update(action, currentModel);
+
+        console.log("POST");
+        console.log(JSON.stringify(currentModel));
+        
+        let updatedView = view(updateView, currentModel);
+
+        if (!ap) return;
         ap.replaceChild(updatedView, currentView);
         currentView = updatedView;
     }
