@@ -12,9 +12,7 @@ var Action;
     Action[Action["HIDE_FORM"] = 2] = "HIDE_FORM";
     Action[Action["SAVE_NEW"] = 3] = "SAVE_NEW";
     Action[Action["SAVE_EDIT"] = 4] = "SAVE_EDIT";
-    Action[Action["STORE_TEXT_DESCRIPTION"] = 5] = "STORE_TEXT_DESCRIPTION";
-    Action[Action["STORE_NUMBER"] = 6] = "STORE_NUMBER";
-    Action[Action["REMOVE"] = 7] = "REMOVE";
+    Action[Action["REMOVE"] = 5] = "REMOVE";
 })(Action || (Action = {}));
 function calculateTotal(meals) {
     return meals.map(function (m) { return m.calories; }).reduce(function (acc, m) { return acc + m; }, 0);
@@ -114,8 +112,6 @@ function update(action, state) {
         case Action.REMOVE: return handleRemove(state);
         case Action.SAVE_EDIT: return handleSaveEdit(state);
         case Action.SAVE_NEW: return handleSaveNew(state);
-        case Action.STORE_NUMBER:
-        case Action.STORE_TEXT_DESCRIPTION: break; //do nothing
     }
     return state;
 }
@@ -130,12 +126,10 @@ function view(dispatchFunction, state) {
     else {
         div.appendChild(input('Meal name: ', 'string', state.pendingNewDescription, function (ev) {
             state = handleAddText(state, nullSafe(ev));
-            // dispatchFunction(Action.STORE_TEXT_DESCRIPTION);
         }));
         var getCalorie = function () { return state.pendingNewCalories === null ? '' : state.pendingNewCalories.toString(); };
         div.appendChild(input('Calories: ', 'number', getCalorie(), function (ev) {
             state = handleAddNumber(state, nullSafe(ev));
-            // dispatchFunction(Action.STORE_NUMBER);
         }));
         if (state.mode === Mode.ADD) {
             div.appendChild(button(function () { return dispatchFunction(Action.SAVE_NEW); }, 'Save'));
@@ -257,11 +251,11 @@ function app() {
     var currentView = view(updateView, initState);
     ap.appendChild(currentView);
     function updateView(action) {
-        console.log("PRE");
-        console.log(JSON.stringify(currentModel));
+        // console.log("PRE");
+        // console.log(JSON.stringify(currentModel));
         currentModel = update(action, currentModel);
-        console.log("POST");
-        console.log(JSON.stringify(currentModel));
+        // console.log("POST");
+        // console.log(JSON.stringify(currentModel));
         var updatedView = view(updateView, currentModel);
         if (!ap)
             return;

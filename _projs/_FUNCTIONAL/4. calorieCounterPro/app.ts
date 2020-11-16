@@ -15,8 +15,6 @@ enum Action {
     HIDE_FORM,
     SAVE_NEW,
     SAVE_EDIT,
-    STORE_TEXT_DESCRIPTION,
-    STORE_NUMBER,
     REMOVE
 }
 
@@ -147,8 +145,6 @@ function update(action: Action, state: State): State {
         case Action.REMOVE: return handleRemove(state);
         case Action.SAVE_EDIT: return handleSaveEdit(state);
         case Action.SAVE_NEW: return handleSaveNew(state);
-        case Action.STORE_NUMBER:
-        case Action.STORE_TEXT_DESCRIPTION: break; //do nothing
     }
     return state;
 }
@@ -167,13 +163,11 @@ function view(dispatchFunction: Function, state: State): HTMLElement {
 
         div.appendChild(input('Meal name: ', 'string', state.pendingNewDescription, (ev: Event) => {
             state = handleAddText(state, nullSafe(ev));
-            // dispatchFunction(Action.STORE_TEXT_DESCRIPTION);
         }));
         const getCalorie = () => state.pendingNewCalories === null ? '' : state.pendingNewCalories.toString();
 
         div.appendChild(input('Calories: ', 'number', getCalorie(), (ev: Event) => {
             state = handleAddNumber(state, nullSafe(ev));
-            // dispatchFunction(Action.STORE_NUMBER);
         }));
 
         if (state.mode === Mode.ADD) {
@@ -322,13 +316,13 @@ function app() {
 
 
     function updateView(action: Action) {
-        console.log("PRE");
-        console.log(JSON.stringify(currentModel));
+        // console.log("PRE");
+        // console.log(JSON.stringify(currentModel));
         
         currentModel = update(action, currentModel);
 
-        console.log("POST");
-        console.log(JSON.stringify(currentModel));
+        // console.log("POST");
+        // console.log(JSON.stringify(currentModel));
         
         let updatedView = view(updateView, currentModel);
 
