@@ -46,13 +46,13 @@ function toUnit(text) {
 }
 function view(dispatch, state) {
     const divMain = document.createElement('div');
+    divMain.id = 'main-div';
     const div1 = document.createElement('div');
-    const lab1 = document.createElement('label');
+    const lab1 = document.createElement('h1');
     lab1.innerText = 'input';
     div1.appendChild(lab1);
     div1.appendChild(input(state.sourceValue, (ev) => {
         state.sourceValue = ev.target.value;
-        // dispatch();
     }));
     div1.appendChild(combobox(getAllUnits(), state.from, (ev) => {
         // not an error!
@@ -63,12 +63,11 @@ function view(dispatch, state) {
         }
     }));
     const div2 = document.createElement('div');
-    const lab2 = document.createElement('label');
+    const lab2 = document.createElement('h1');
     lab2.innerText = 'result';
     div2.appendChild(lab2);
     div2.appendChild(input(state.targetValue, (ev) => {
         state.targetValue = ev.target.value;
-        // dispatch();
     }));
     div2.appendChild(combobox(getAllUnits(), state.to, (ev) => {
         const selected = toUnit(ev.target.value);

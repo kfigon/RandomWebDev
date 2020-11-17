@@ -52,9 +52,10 @@ function toUnit(text: string): Unit | null {
 
 function view(dispatch: Function, state: State): HTMLElement {
     const divMain = document.createElement('div');
+    divMain.id = 'main-div';
 
     const div1 = document.createElement('div');
-    const lab1 = document.createElement('label');
+    const lab1 = document.createElement('h1');
     lab1.innerText = 'input';
     div1.appendChild(lab1);
     div1.appendChild(input(state.sourceValue,
@@ -75,7 +76,7 @@ function view(dispatch: Function, state: State): HTMLElement {
     ));
 
     const div2 = document.createElement('div');
-    const lab2 = document.createElement('label');
+    const lab2 = document.createElement('h1');
     lab2.innerText = 'result';
     div2.appendChild(lab2);
     div2.appendChild(input(state.targetValue,

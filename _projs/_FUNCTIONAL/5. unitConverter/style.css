@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    background-color: rgb(241, 241, 241);
+}
+label{
+    display: block;
+}
+input {
+    display: block;
+    width: 150px;
+}
+#main-div{
+    margin-top: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
