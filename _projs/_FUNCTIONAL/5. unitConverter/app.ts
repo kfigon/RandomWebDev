@@ -59,6 +59,7 @@ function view(dispatch: Function, state: State): HTMLElement {
     lab1.innerText = 'input';
     div1.appendChild(lab1);
     div1.appendChild(input(state.sourceValue,
+        false,
         (ev: Event) => {
             state.sourceValue = ev.target.value;
         }));
@@ -80,6 +81,7 @@ function view(dispatch: Function, state: State): HTMLElement {
     lab2.innerText = 'result';
     div2.appendChild(lab2);
     div2.appendChild(input(state.targetValue,
+        true,
         (ev: Event) => {
             state.targetValue = ev.target.value;
         }));
@@ -121,9 +123,10 @@ function combobox(values: Unit[], selectedValue: Unit, inputCallback: any): HTML
     return sel;
 }
 
-function input(value: number | null, inputCallback: any): HTMLInputElement {
+function input(value: number | null, readOnly: boolean, inputCallback: any): HTMLInputElement {
     const inp = document.createElement('input');
     inp.type = 'number';
+    inp.readOnly = readOnly;
     if (value !== null) {
         inp.defaultValue = value.toString();
     }

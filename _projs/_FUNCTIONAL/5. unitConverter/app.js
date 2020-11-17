@@ -51,7 +51,7 @@ function view(dispatch, state) {
     const lab1 = document.createElement('h1');
     lab1.innerText = 'input';
     div1.appendChild(lab1);
-    div1.appendChild(input(state.sourceValue, (ev) => {
+    div1.appendChild(input(state.sourceValue, false, (ev) => {
         state.sourceValue = ev.target.value;
     }));
     div1.appendChild(combobox(getAllUnits(), state.from, (ev) => {
@@ -66,7 +66,7 @@ function view(dispatch, state) {
     const lab2 = document.createElement('h1');
     lab2.innerText = 'result';
     div2.appendChild(lab2);
-    div2.appendChild(input(state.targetValue, (ev) => {
+    div2.appendChild(input(state.targetValue, true, (ev) => {
         state.targetValue = ev.target.value;
     }));
     div2.appendChild(combobox(getAllUnits(), state.to, (ev) => {
@@ -97,9 +97,10 @@ function combobox(values, selectedValue, inputCallback) {
         .forEach(v => sel.appendChild(v));
     return sel;
 }
-function input(value, inputCallback) {
+function input(value, readOnly, inputCallback) {
     const inp = document.createElement('input');
     inp.type = 'number';
+    inp.readOnly = readOnly;
     if (value !== null) {
         inp.defaultValue = value.toString();
     }
