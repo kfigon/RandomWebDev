@@ -5,6 +5,9 @@ var Unit;
     Unit["Fahrenheit"] = "Fahrenheit";
     Unit["Kelvin"] = "Kelvin";
 })(Unit || (Unit = {}));
+function getAllUnits() {
+    return [Unit.Celcius, Unit.Fahrenheit, Unit.Kelvin];
+}
 function celcToFahr(val) { return (val * 9 / 5) + 35; }
 function fahrToCelc(val) { return (val - 32) * 5 / 9; }
 function celToKelv(val) { return val + 273.15; }
@@ -32,30 +35,62 @@ function update(state) {
     if (foo && state.sourceValue !== null) {
         state.targetValue = foo(state.sourceValue);
     }
+    else {
+        state.targetValue = state.sourceValue;
+    }
     return state;
 }
+function toUnit(text) {
+    const ret = getAllUnits().filter(u => u.toString() === text);
+    return ret.length === 0 ? null : ret[0];
+}
 function view(dispatch, state) {
-    const div = document.createElement('div');
-    div.appendChild(input(1, (ev) => {
-        console.log('typed');
-        dispatch();
+    const divMain = document.createElement('div');
+    const div1 = document.createElement('div');
+    const lab1 = document.createElement('label');
+    lab1.innerText = 'input';
+    div1.appendChild(lab1);
+    div1.appendChild(input(state.sourceValue, (ev) => {
+        state.sourceValue = ev.target.value;
+        // dispatch();
     }));
-    div.appendChild(combobox([Unit.Celcius, Unit.Fahrenheit, Unit.Kelvin], (ev) => {
-        if (ev && ev.target) {
-            // not an error!
-            console.log(ev.target.value);
+    div1.appendChild(combobox(getAllUnits(), state.from, (ev) => {
+        // not an error!
+        const selected = toUnit(ev.target.value);
+        if (selected) {
+            state.from = selected;
             dispatch();
         }
     }));
-    return div;
+    const div2 = document.createElement('div');
+    const lab2 = document.createElement('label');
+    lab2.innerText = 'result';
+    div2.appendChild(lab2);
+    div2.appendChild(input(state.targetValue, (ev) => {
+        state.targetValue = ev.target.value;
+        // dispatch();
+    }));
+    div2.appendChild(combobox(getAllUnits(), state.to, (ev) => {
+        const selected = toUnit(ev.target.value);
+        if (selected) {
+            state.to = selected;
+            dispatch();
+        }
+    }));
+    divMain.appendChild(div1);
+    divMain.appendChild(div2);
+    return divMain;
 }
-function combobox(values, inputCallback) {
+function combobox(values, selectedValue, inputCallback) {
     const sel = document.createElement('select');
     sel.addEventListener('change', inputCallback);
     const createOption = (val) => {
         const o = document.createElement('option');
         o.value = val.toString();
         o.innerText = val.toString();
+        if (val === selectedValue) {
+            o.selected = true;
+        }
         return o;
     };
     values
@@ -65,6 +100,7 @@ function combobox(values, inputCallback) {
 }
 function input(value, inputCallback) {
     const inp = document.createElement('input');
+    inp.type = 'number';
     if (value !== null) {
         inp.defaultValue = value.toString();
     }
@@ -79,7 +115,7 @@ function app() {
     }
     let state = {
         from: Unit.Celcius,
-        to: Unit.Celcius,
+        to: Unit.Fahrenheit,
         sourceValue: 0,
         targetValue: 0,
     };

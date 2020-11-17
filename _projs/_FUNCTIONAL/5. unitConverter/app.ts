@@ -7,6 +7,10 @@ interface State {
 
 enum Unit { Celcius = 'Celcius', Fahrenheit = 'Fahrenheit', Kelvin = 'Kelvin' }
 
+function getAllUnits(): Unit[] {
+    return [Unit.Celcius, Unit.Fahrenheit, Unit.Kelvin];
+}
+
 function celcToFahr(val: number): number { return (val * 9 / 5) + 35; }
 function fahrToCelc(val: number): number { return (val - 32) * 5 / 9; }
 
@@ -34,34 +38,68 @@ function update(state: State): State {
     const foo: Function | undefined = mapper.get(from)?.get(to);
     if (foo && state.sourceValue !== null) {
         state.targetValue = foo(state.sourceValue);
+    } else {
+        state.targetValue = state.sourceValue;
     }
 
     return state;
 }
 
-function view(dispatch: Function, state: State): HTMLElement {
-    const div = document.createElement('div');
-
-    div.appendChild(input(1,
-        (ev: Event) => {
-            console.log('typed')
-            dispatch();
-        }));
-
-    div.appendChild(combobox([Unit.Celcius, Unit.Fahrenheit, Unit.Kelvin],
-        (ev: Event) => {
-            if (ev && ev.target) {
-                // not an error!
-                console.log(ev.target.value);
-                dispatch();
-            }
-
-        }
-    ));
-    return div;
+function toUnit(text: string): Unit | null {
+    const ret = getAllUnits().filter(u => u.toString() === text);
+    return ret.length === 0 ? null : ret[0];
 }
 
-function combobox(values: Unit[], inputCallback: any): HTMLSelectElement {
+function view(dispatch: Function, state: State): HTMLElement {
+    const divMain = document.createElement('div');
+
+    const div1 = document.createElement('div');
+    const lab1 = document.createElement('label');
+    lab1.innerText = 'input';
+    div1.appendChild(lab1);
+    div1.appendChild(input(state.sourceValue,
+        (ev: Event) => {
+            state.sourceValue = ev.target.value;
+        }));
+
+    div1.appendChild(combobox(getAllUnits(),
+        state.from,
+        (ev: Event) => {
+            // not an error!
+            const selected = toUnit(ev.target.value);
+            if (selected) {
+                state.from = selected;
+                dispatch();
+            }
+        }
+    ));
+
+    const div2 = document.createElement('div');
+    const lab2 = document.createElement('label');
+    lab2.innerText = 'result';
+    div2.appendChild(lab2);
+    div2.appendChild(input(state.targetValue,
+        (ev: Event) => {
+            state.targetValue = ev.target.value;
+        }));
+
+    div2.appendChild(combobox(getAllUnits(),
+        state.to,
+        (ev: Event) => {
+            const selected = toUnit(ev.target.value);
+            if (selected) {
+                state.to = selected;
+                dispatch();
+            }
+        }
+    ));
+
+    divMain.appendChild(div1);
+    divMain.appendChild(div2);
+    return divMain;
+}
+
+function combobox(values: Unit[], selectedValue: Unit, inputCallback: any): HTMLSelectElement {
     const sel = document.createElement('select');
     sel.addEventListener('change', inputCallback);
 
@@ -69,6 +107,9 @@ function combobox(values: Unit[], inputCallback: any): HTMLSelectElement {
         const o = document.createElement('option');
         o.value = val.toString();
         o.innerText = val.toString();
+        if (val === selectedValue) {
+            o.selected = true;
+        }
         return o;
     }
 
@@ -81,6 +122,7 @@ function combobox(values: Unit[], inputCallback: any): HTMLSelectElement {
 
 function input(value: number | null, inputCallback: any): HTMLInputElement {
     const inp = document.createElement('input');
+    inp.type = 'number';
     if (value !== null) {
         inp.defaultValue = value.toString();
     }
@@ -98,7 +140,7 @@ function app() {
 
     let state: State = {
         from: Unit.Celcius,
-        to: Unit.Celcius,
+        to: Unit.Fahrenheit,
         sourceValue: 0,
         targetValue: 0,
     }
